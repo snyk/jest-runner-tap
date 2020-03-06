@@ -1,0 +1,28 @@
+{
+  "name": "jest-tap-bridge",
+  "version": "0.1.0",
+  "description": "Jest runner which executes tap, and parses the result",
+  "main": "dist/index.js",
+  "repository": "https://github.com/FauxFaux/jest-tap-bridge",
+  "license": "ISC",
+  "scripts": {
+    "format": "prettier --write 'lib/**/*.ts'",
+    "prepare": "npm run build",
+    "build": "tsc"
+  },
+  "author": "Chris West (Faux) <solo-npm@goeswhere.com>",
+  "dependencies": {
+    "events-to-array": "^1.1.2",
+    "jest": "^25.1.0",
+    "tap-parser": "^10.0.1",
+    "tslib": "^1.11.1"
+  },
+  "devDependencies": {
+    "@types/node": "^10.17.17",
+    "prettier": "^1.19.1",
+    "typescript": "^3.8.3"
+  },
+  "engines": {
+    "node": ">=10"
+  }
+}
