@@ -6,7 +6,7 @@
   "repository": "https://github.com/FauxFaux/jest-tap-bridge",
   "license": "ISC",
   "scripts": {
-    "format": "prettier --write 'lib/**/*.ts'",
+    "format": "prettier --write 'lib/**/*.ts' 'examples/**/*.?s'",
     "prepare": "npm run build",
     "depcheck": "depcheck",
     "build": "tsc"
@@ -27,6 +27,7 @@
     "@types/node": "^10.17.17",
     "depcheck": "^0.9.2",
     "prettier": "^1.19.1",
+    "tap": "^14.10.6",
     "typescript": "^3.8.3"
   },
   "engines": {
