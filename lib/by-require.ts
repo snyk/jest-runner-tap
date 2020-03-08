@@ -1,8 +1,8 @@
 import { Config } from '@jest/types';
-import { createEmptyTestResult, TestResult } from '@jest/test-result';
+import { TestResult } from '@jest/test-result';
 import { JestEnvironment } from '@jest/environment';
 import Runtime = require('jest-runtime');
-import { Writable } from 'stream';
+import { makeParser, translateArray } from './translator';
 
 async function byRequire(
   globalConfig: Config.GlobalConfig,
@@ -11,19 +11,10 @@ async function byRequire(
   runtime: Runtime,
   testPath: string,
 ): Promise<TestResult> {
+  const [parser, output] = makeParser();
+
   const tap = runtime.requireModule(require.resolve('tap'));
-  tap.pipe(
-    new Writable({
-      write(
-        chunk: any,
-        encoding: string,
-        callback: (error?: Error | null) => void,
-      ): void {
-        console.log(chunk.toString());
-        callback(null);
-      },
-    }),
-  );
+  tap.pipe(parser);
 
   runtime.requireModule(testPath);
 
@@ -36,7 +27,11 @@ async function byRequire(
   //  b) kills anything else in flight, catching our mistakes
   tap.endAll();
 
-  let result = createEmptyTestResult();
+  const result = translateArray(output);
+
+  result.displayName = testPath;
+  result.testFilePath = testPath;
+
   return result;
 }
 
