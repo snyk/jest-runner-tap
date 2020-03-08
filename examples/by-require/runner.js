@@ -8,7 +8,7 @@ async function main() {
 
   const events = eventsToArray(parser);
 
-  require('./vicitm');
+  require(process.argv[2] || './victim');
 
   await tap.test('jest-tap-bridge is finishing up', async (t) => {
     t.ok('finished');
@@ -25,7 +25,7 @@ async function main() {
     throw new Error('no events');
   }
 
-  if (8 !== last[1].pass) {
+  if (4 !== last[1].pass && 8 !== last[1].pass) {
     console.dir(last[1]);
     throw new Error('incorrect last event');
   }
