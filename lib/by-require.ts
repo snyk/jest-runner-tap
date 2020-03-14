@@ -27,7 +27,7 @@ async function byRequire(
   //  b) kills anything else in flight, catching our mistakes
   tap.endAll();
 
-  const result = translateArray(output);
+  const result = translateArray(output, { strip: 0 });
 
   result.displayName = testPath;
   result.testFilePath = testPath;

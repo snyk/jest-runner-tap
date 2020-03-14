@@ -28,7 +28,8 @@ export async function bySpawn(
 
   const [code, sig] = await runTapOn(parser, tapCommand, testPath);
 
-  const result = translateArray(output);
+  // 1: the path of the file itself
+  const result = translateArray(output, { strip: 1 });
 
   result.displayName = testPath;
   result.testFilePath = testPath;

@@ -33,18 +33,26 @@ export function makeParser(): [TapParser, TapParserArray] {
   return [parser, output];
 }
 
-export function translateArray(output: TapParserArray): TestResult {
+/**
+ * @param strip remove leading path components; and ignore tests for fewer components
+ */
+export function translateArray(
+  output: TapParserArray,
+  { strip }: { strip: number },
+): TestResult {
   const tests: Tests = new Map();
   bunchUp(output, tests);
 
-  const tapSummary = [...tests.entries()].filter(([path]) => path.length > 1);
+  const tapSummary = [...tests.entries()].filter(
+    ([path]) => path.length > strip,
+  );
   const result = createEmptyTestResult();
 
   result.failureMessage = '';
 
   result.testResults = tapSummary.map(([fullPath, { results, time }]) => {
     // removing the full path
-    const path = fullPath.slice(1);
+    const path = fullPath.slice(strip);
     const passing = results.filter((r) => r.ok);
     const notOkay = results.filter((r) => !r.ok);
     const passed = notOkay.length === 0;
