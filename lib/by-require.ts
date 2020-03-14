@@ -13,7 +13,7 @@ async function byRequire(
 ): Promise<TestResult> {
   const [parser, output] = makeParser();
 
-  const tap = runtime.requireModule(require.resolve('tap'));
+  const tap = runtime.requireModule(testPath, 'tap');
   tap.pipe(parser);
 
   runtime.requireModule(testPath);
