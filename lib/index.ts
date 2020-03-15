@@ -1,3 +1,3 @@
-import { bySpawn } from './by-spawn';
+import { detect } from './detect';
 
-export = bySpawn;
+export = detect;
