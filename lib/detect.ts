@@ -18,7 +18,7 @@ export async function detect(
     case 'spawn':
       return bySpawn(config, testPath);
     case 'require':
-      return byRequire(runtime, testPath);
+      return byRequire(config, runtime, testPath);
     default:
       throw new Error('unreachable');
   }

@@ -3,9 +3,11 @@ import type Runtime from 'jest-runtime';
 import { timeout } from 'promise-timeout';
 import type TapParser from 'tap-parser';
 import { defaultTestResult, makeParser, pushExceptionFailure, translateArray } from './translator';
+import {TapBridgeConfig} from './config';
 
 
 export async function byRequire(
+  config: TapBridgeConfig,
   runtime: Runtime,
   testPath: string,
 ): Promise<TestResult> {
@@ -14,7 +16,7 @@ export async function byRequire(
   const result = defaultTestResult(testPath);
 
   try {
-    await timeout(callTap(runtime, testPath, parser), 1_000);
+    await timeout(callTap(runtime, testPath, parser), config.timeoutMillis);
   } catch (err) {
     pushExceptionFailure(result, err, 'require');
   }

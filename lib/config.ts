@@ -8,6 +8,7 @@ export type Runner = 'spawn' | 'require';
 export interface TapBridgeConfig {
   runner: 'require' | 'spawn',
   tapCommand: string[],
+  timeoutMillis: number,
 }
 
 export async function loadConfig(project: Config.ProjectConfig, testPath: string): Promise<TapBridgeConfig> {
@@ -18,6 +19,7 @@ export async function loadConfig(project: Config.ProjectConfig, testPath: string
   const config: TapBridgeConfig = {
     runner: 'spawn',
     tapCommand: [ path.join(project.rootDir, 'node_modules/.bin/tap'), '-R', 'tap' ],
+    timeoutMillis: 5_000,
   };
 
 
@@ -37,6 +39,17 @@ export async function loadConfig(project: Config.ProjectConfig, testPath: string
 
   if (test.tapCommand) {
     throw new Error('overriding command per-test is not supported, due to author laziness');
+  }
+
+  if (proj.timeoutMillis) {
+    config.timeoutMillis = proj.timeoutMillis;
+  }
+
+  if (test.timeoutMillis) {
+    if (Array.isArray(test.timeoutMillis)) {
+      throw new Error('array of timeouts is meaningless');
+    }
+    config.timeoutMillis = Number.parseInt(test.timeoutMillis);
   }
 
   return config;
