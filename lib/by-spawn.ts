@@ -1,13 +1,13 @@
 import { spawn } from 'child_process';
 import * as path from 'path';
 
-import Runtime = require('jest-runtime');
-import { Config } from '@jest/types';
-import { JestEnvironment } from '@jest/environment';
-import { TestResult } from '@jest/test-result';
+import type Runtime from 'jest-runtime';
+import type { Config } from '@jest/types';
+import type { JestEnvironment } from '@jest/environment';
+import type { TestResult } from '@jest/test-result';
 import { replaceRootDirInPath } from 'jest-config';
 import { makeParser, translateArray } from './translator';
-import { Writable } from 'stream';
+import type { Writable } from 'stream';
 
 export async function bySpawn(
   globalConfig: Config.GlobalConfig,

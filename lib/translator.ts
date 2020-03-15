@@ -3,6 +3,20 @@ import { inspect } from 'util';
 import TapParser = require('tap-parser');
 import eventsToArray = require('events-to-array');
 
+interface Result {
+  ok: boolean;
+  id: number;
+  time?: number;
+  name: string;
+  diag?: {
+    test?: string;
+  };
+}
+
+type TapParserArray = Array<PChild | PAssert>;
+type PChild = ['child', TapParserArray];
+type PAssert = ['assert', Result];
+
 type Tests = Map<string[], { results: Result[]; time: number }>;
 
 // it is up to the caller to make sure the returned array is only read after the parser is complete
