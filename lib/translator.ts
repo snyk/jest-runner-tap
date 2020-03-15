@@ -1,4 +1,4 @@
-import type { AssertionResult, SerializableError, TestResult } from '@jest/test-result';
+import type { SerializableError, TestResult } from '@jest/test-result';
 import { inspect } from 'util';
 import TapParser = require('tap-parser');
 import eventsToArray = require('events-to-array');
@@ -62,7 +62,7 @@ export function translateArray(
     ([path]) => path.length > strip,
   );
 
-  const newResults = tapSummary.map(([fullPath, { results, time }]) => {
+  for (const [fullPath, { results, time }] of tapSummary) {
     // removing the full path
     const path = fullPath.slice(strip);
     const passing = results.filter((r) => r.ok);
@@ -84,7 +84,7 @@ export function translateArray(
       failureMessages.push(msg);
     }
     result.failureMessage += failureMessages.join('\n');
-    return {
+    result.testResults.push({
       title: path[path.length - 1],
       fullName: path.join(' // '),
       duration: time,
@@ -93,10 +93,8 @@ export function translateArray(
       failureMessages,
       location: undefined,
       status: passed ? 'passed' : 'failed',
-    } as AssertionResult;
-  });
-
-  result.testResults.push(...newResults);
+    });
+  }
 
   return result;
 }
