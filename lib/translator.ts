@@ -1,4 +1,4 @@
-import type { SerializableError, TestResult } from '@jest/test-result';
+import { createEmptyTestResult, SerializableError, TestResult } from '@jest/test-result';
 import { inspect } from 'util';
 import TapParser = require('tap-parser');
 import eventsToArray = require('events-to-array');
@@ -153,4 +153,12 @@ export function pushExceptionFailure(result: TestResult, testPath: string, err: 
   });
   result.failureMessage += `  ✕ ${msg} failed: ${err} - ${err.stack}\n\n`;
   result.numFailingTests += 1;
+}
+
+export function defaultTestResult(testPath: string): TestResult {
+  const result = createEmptyTestResult();
+  result.failureMessage = '';
+  result.displayName = testPath;
+  result.testFilePath = testPath;
+  return result;
 }

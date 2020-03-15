@@ -1,8 +1,8 @@
-import { createEmptyTestResult, TestResult } from '@jest/test-result';
+import type { TestResult } from '@jest/test-result';
 import type Runtime from 'jest-runtime';
 import { timeout } from 'promise-timeout';
 import type TapParser from 'tap-parser';
-import { makeParser, pushExceptionFailure, translateArray } from './translator';
+import { defaultTestResult, makeParser, pushExceptionFailure, translateArray } from './translator';
 
 
 export async function byRequire(
@@ -11,11 +11,7 @@ export async function byRequire(
 ): Promise<TestResult> {
   const [parser, output] = makeParser();
 
-  const result = createEmptyTestResult();
-
-  result.failureMessage = '';
-  result.displayName = testPath;
-  result.testFilePath = testPath;
+  const result = defaultTestResult(testPath);
 
   try {
     await timeout(callTap(runtime, testPath, parser), 1_000);

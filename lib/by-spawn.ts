@@ -1,8 +1,8 @@
 import { spawn } from 'child_process';
 import type { Writable } from 'stream';
-import { createEmptyTestResult, TestResult } from '@jest/test-result';
+import type { TestResult } from '@jest/test-result';
 import type { TapBridgeConfig } from './config';
-import { makeParser, translateArray } from './translator';
+import { defaultTestResult, makeParser, translateArray } from './translator';
 
 export async function bySpawn(
   config: TapBridgeConfig,
@@ -14,13 +14,10 @@ export async function bySpawn(
 
   const [code, sig] = await runTapOn(parser, tapCommand, testPath);
 
-  const result = createEmptyTestResult();
+  const result = defaultTestResult(testPath);
 
   // 1: the path of the file itself
   translateArray(result, output, { strip: 1 });
-
-  result.displayName = testPath;
-  result.testFilePath = testPath;
 
   if (code || sig) {
     result.testResults.push({
