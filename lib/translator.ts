@@ -1,4 +1,4 @@
-import { createEmptyTestResult, TestResult } from '@jest/test-result';
+import type { AssertionResult, SerializableError, TestResult } from '@jest/test-result';
 import { inspect } from 'util';
 import TapParser = require('tap-parser');
 import eventsToArray = require('events-to-array');
@@ -51,20 +51,18 @@ export function makeParser(): [TapParser, TapParserArray] {
  * @param strip remove leading path components; and ignore tests for fewer components
  */
 export function translateArray(
+  result: TestResult,
   output: TapParserArray,
   { strip }: { strip: number },
-): TestResult {
+) {
   const tests: Tests = new Map();
   bunchUp(output, tests);
 
   const tapSummary = [...tests.entries()].filter(
     ([path]) => path.length > strip,
   );
-  const result = createEmptyTestResult();
 
-  result.failureMessage = '';
-
-  result.testResults = tapSummary.map(([fullPath, { results, time }]) => {
+  const newResults = tapSummary.map(([fullPath, { results, time }]) => {
     // removing the full path
     const path = fullPath.slice(strip);
     const passing = results.filter((r) => r.ok);
@@ -95,8 +93,10 @@ export function translateArray(
       failureMessages,
       location: undefined,
       status: passed ? 'passed' : 'failed',
-    };
+    } as AssertionResult;
   });
+
+  result.testResults.push(...newResults);
 
   return result;
 }
@@ -107,10 +107,16 @@ function bunchUp(arr: TapParserArray, tests: Tests, path: string[] = []) {
     switch (el[0]) {
       case 'child': {
         i += 1;
-        const [assert, result] = arr[i] as [string, Result];
+        const follower = arr[i];
+        if (2 !== follower?.length) {
+          throw new Error(
+            `unexpected child follower value: ${JSON.stringify(follower)}`,
+          )
+        }
+        const [assert, result] = follower as [string, Result];
         if ('assert' !== assert) {
           throw new Error(
-            `unexpected child follower: ${JSON.stringify(arr[i])}`,
+            `unexpected child follower type: ${JSON.stringify(follower)}`,
           );
         }
         const newPath = [...path, result.name];
@@ -134,4 +140,19 @@ function bunchUp(arr: TapParserArray, tests: Tests, path: string[] = []) {
       }
     }
   }
+}
+
+export function pushExceptionFailure(result: TestResult, testPath: string, err: SerializableError, msg: string) {
+  result.testResults.push({
+    title: `${msg} success`,
+    fullName: `${testPath} could ${msg} successfully`,
+    duration: null,
+    numPassingAsserts: 0,
+    ancestorTitles: [testPath],
+    failureMessages: [`${err} - ${err.stack}`],
+    location: undefined,
+    status: 'failed',
+  });
+  result.failureMessage += `  ✕ ${msg} failed: ${err} - ${err.stack}\n\n`;
+  result.numFailingTests += 1;
 }
