@@ -1,13 +1,8 @@
-import type { Config } from '@jest/types';
 import type { TestResult } from '@jest/test-result';
-import type { JestEnvironment } from '@jest/environment';
 import type Runtime from 'jest-runtime';
 import { makeParser, translateArray } from './translator';
 
 export async function byRequire(
-  globalConfig: Config.GlobalConfig,
-  config: Config.ProjectConfig,
-  environment: JestEnvironment,
   runtime: Runtime,
   testPath: string,
 ): Promise<TestResult> {

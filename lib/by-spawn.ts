@@ -1,28 +1,14 @@
 import { spawn } from 'child_process';
-import * as path from 'path';
-
-import type Runtime from 'jest-runtime';
-import type { Config } from '@jest/types';
-import type { JestEnvironment } from '@jest/environment';
-import type { TestResult } from '@jest/test-result';
-import { replaceRootDirInPath } from 'jest-config';
-import { makeParser, translateArray } from './translator';
 import type { Writable } from 'stream';
+import type { TestResult } from '@jest/test-result';
+import type { TapBridgeConfig } from './config';
+import { makeParser, translateArray } from './translator';
 
 export async function bySpawn(
-  globalConfig: Config.GlobalConfig,
-  config: Config.ProjectConfig,
-  environment: JestEnvironment,
-  runtime: Runtime,
+  config: TapBridgeConfig,
   testPath: string,
 ): Promise<TestResult> {
-  const tapCommand = (
-    config.testEnvironmentOptions['tapCommand'] || [
-      path.join(config.rootDir, 'node_modules/.bin/tap'),
-      '-R',
-      'tap',
-    ]
-  ).map((p: string) => replaceRootDirInPath(config.rootDir, p));
+  const tapCommand = config.tapCommand;
 
   const [parser, output] = makeParser();
 
@@ -46,7 +32,7 @@ export async function bySpawn(
       status: 'failed',
     });
     result.numFailingTests += 1;
-    result.failureMessage += `... and the test *file* failed: ${code} ${sig}`;
+    result.failureMessage += `\n... and the test *file* failed: ${code} ${sig}`;
   }
 
   return result;
