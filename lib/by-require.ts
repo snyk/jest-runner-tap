@@ -16,20 +16,10 @@ export async function byRequire(
   try {
     await timeout(callTap(runtime, testPath, parser), 1_000);
   } catch (err) {
-    result.testExecError = err;
-    result.leaks = true;
-
-    pushExceptionFailure(result, testPath, err, 'require');
+    pushExceptionFailure(result, err, 'require');
   }
 
-  try {
-    translateArray(result, output, {strip: 0});
-  } catch (err) {
-    if (!result.testExecError) {
-      result.testExecError = err;
-    }
-    pushExceptionFailure(result, testPath, err, 'translate');
-  }
+  translateArray(result, output, {strip: 0});
 
   return result;
 }

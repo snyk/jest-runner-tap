@@ -17,7 +17,8 @@ type TapParserArray = Array<PChild | PAssert>;
 type PChild = ['child', TapParserArray];
 type PAssert = ['assert', Result];
 
-type Tests = Map<string[], { results: Result[]; time: number }>;
+type TestAssertions = { results: Result[]; time: number };
+type Tests = Map<string[], TestAssertions>;
 
 // it is up to the caller to make sure the returned array is only read after the parser is complete
 export function makeParser(): [TapParser, TapParserArray] {
@@ -56,13 +57,29 @@ export function translateArray(
   { strip }: { strip: number },
 ) {
   const tests: Tests = new Map();
-  bunchUp(output, tests);
 
+  try {
+    bunchUp(output, tests);
+  } catch (err) {
+    pushExceptionFailure(result, err, 'bunchUp');
+  }
+
+  try {
+    pushAsserts(tests, strip, result);
+  } catch (err) {
+    pushExceptionFailure(result, err, 'pushAsserts');
+  }
+
+  return result;
+}
+
+
+function pushAsserts(tests: Map<string[], TestAssertions>, strip: number, result: TestResult) {
   const tapSummary = [...tests.entries()].filter(
     ([path]) => path.length > strip,
   );
 
-  for (const [fullPath, { results, time }] of tapSummary) {
+  for (const [fullPath, {results, time}] of tapSummary) {
     // removing the full path
     const path = fullPath.slice(strip);
     const passing = results.filter((r) => r.ok);
@@ -77,7 +94,7 @@ export function translateArray(
     for (const failure of notOkay) {
       let msg = '';
       msg += `  ✕  ${failure.diag?.test || failure.name}\n`;
-      msg += inspect({ ...failure.diag }, { depth: 3, colors: true }).replace(
+      msg += inspect({...failure.diag}, {depth: 3, colors: true}).replace(
         /^/gm,
         '     ',
       );
@@ -95,8 +112,6 @@ export function translateArray(
       status: passed ? 'passed' : 'failed',
     });
   }
-
-  return result;
 }
 
 function bunchUp(arr: TapParserArray, tests: Tests, path: string[] = []) {
@@ -140,19 +155,22 @@ function bunchUp(arr: TapParserArray, tests: Tests, path: string[] = []) {
   }
 }
 
-export function pushExceptionFailure(result: TestResult, testPath: string, err: SerializableError, msg: string) {
+export function pushExceptionFailure(result: TestResult, err: SerializableError, msg: string) {
   result.testResults.push({
     title: `${msg} success`,
-    fullName: `${testPath} could ${msg} successfully`,
+    fullName: `could ${msg} successfully`,
     duration: null,
     numPassingAsserts: 0,
-    ancestorTitles: [testPath],
+    ancestorTitles: [],
     failureMessages: [`${err} - ${err.stack}`],
     location: undefined,
     status: 'failed',
   });
   result.failureMessage += `  ✕ ${msg} failed: ${err} - ${err.stack}\n\n`;
   result.numFailingTests += 1;
+  if (!result.testExecError) {
+    result.testExecError = err;
+  }
 }
 
 export function defaultTestResult(testPath: string): TestResult {
