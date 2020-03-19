@@ -1,10 +1,11 @@
-import {
-  createEmptyTestResult,
-  TestResult,
-} from '@jest/test-result';
+import { createEmptyTestResult, TestResult } from '@jest/test-result';
 import TapParser = require('tap-parser');
 import eventsToArray = require('events-to-array');
-import { pushAsserts, pushExceptionFailure, pushProcessFailure } from './render';
+import {
+  pushAsserts,
+  pushExceptionFailure,
+  pushProcessFailure,
+} from './render';
 
 export interface Result {
   ok: boolean;
