@@ -3,7 +3,8 @@ import type {
   SerializableError,
   TestResult,
 } from '@jest/test-result';
-import type { Result, TestAssertions } from './index';
+import type { Result } from 'tap-parser';
+import type { TestAssertions } from './index';
 
 export function pushAsserts(
   tests: Map<string[], TestAssertions>,

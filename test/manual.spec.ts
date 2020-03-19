@@ -18,31 +18,32 @@ interface AssertResult {
 type ResultyThing = ChildResult | AssertResult;
 
 class Grabber {
-  ours?: ResultyThing[];
+  ours: ResultyThing[] = [];
+  currentChild?: Grabber;
+
   constructor(parent: ResultyThing[], parser: TapParser) {
     parser.on('child', (child) => {
-      if (undefined !== this.ours) {
+      if (undefined !== this.currentChild) {
         throw new Error(
           'new child while we still had events: ' + inspect(this.ours),
         );
       }
-      this.ours = [];
-      new Grabber(this.ours, child);
+      this.currentChild = new Grabber(this.ours, child);
     });
     parser.on('assert', (result) => {
-      if (undefined !== this.ours) {
+      if (undefined !== this.currentChild) {
         parent.push({
           kind: 'child',
           result,
           children: [...this.ours],
         });
+        this.currentChild = undefined;
       } else {
         parent.push({
           kind: 'assert',
           result,
         });
       }
-      this.ours = undefined;
     });
   }
 }

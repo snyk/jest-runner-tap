@@ -6,16 +6,7 @@ import {
   pushExceptionFailure,
   pushProcessFailure,
 } from './render';
-
-export interface Result {
-  ok: boolean;
-  id: number;
-  time?: number;
-  name: string;
-  diag?: {
-    test?: string;
-  };
-}
+import type { Result } from 'tap-parser';
 
 type TapParserArray = Array<PChild | PAssert>;
 type PChild = ['child', TapParserArray];

@@ -1,5 +1,4 @@
 import { spawn } from 'child_process';
-import { Writable } from 'stream';
 import { Config } from '@jest/types';
 import { JestEnvironment } from '@jest/environment';
 import Runtime from 'jest-runtime';
@@ -24,7 +23,7 @@ export async function bySpawn(
 }
 
 async function runTapOn(
-  parser: Writable,
+  parser: NodeJS.WritableStream,
   tapCommand: string[],
   testPath: string,
 ): Promise<[number | null, string | null]> {

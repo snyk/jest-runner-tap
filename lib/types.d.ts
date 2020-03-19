@@ -1,6 +1,25 @@
 declare module 'tap-parser' {
-  import { Writable } from 'stream';
-  class TapParser extends Writable {}
+  import { Result } from 'tap-parser';
+
+  interface TapParser extends NodeJS.WritableStream {}
+
+  class TapParser {
+    on(event: 'child', handler: (child: TapParser) => void): this;
+    on(event: 'assert', handler: (result: Result) => void): this;
+  }
+
+  namespace TapParser {
+    export interface Result {
+      ok: boolean;
+      id: number;
+      time?: number;
+      name: string;
+      diag?: {
+        test?: string;
+      };
+    }
+  }
+
   export = TapParser;
 }
 
