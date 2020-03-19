@@ -1,9 +1,9 @@
 {
-  "name": "jest-tap-bridge",
+  "name": "jest-runner-tap",
   "version": "0.1.0",
   "description": "Jest runner which executes tap, and parses the result",
   "main": "dist/index.js",
-  "repository": "https://github.com/FauxFaux/jest-tap-bridge",
+  "repository": "https://github.com/FauxFaux/jest-runner-tap",
   "license": "ISC",
   "scripts": {
     "format": "prettier --write 'lib/**/*.ts' 'examples/**/*.?s'",
