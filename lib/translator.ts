@@ -1,9 +1,9 @@
+import { inspect } from 'util';
 import {
   createEmptyTestResult,
   SerializableError,
   TestResult,
 } from '@jest/test-result';
-import { inspect } from 'util';
 import TapParser = require('tap-parser');
 import eventsToArray = require('events-to-array');
 
@@ -52,14 +52,13 @@ export function makeParser(): [TapParser, TapParserArray] {
   return [parser, output];
 }
 
-/**
- * @param strip remove leading path components; and ignore tests for fewer components
- */
-export function translateArray(
-  result: TestResult,
-  output: TapParserArray,
-  { strip }: { strip: number },
+export function translateResult(
+  testPath: string,
+  output: Array<PChild | PAssert>,
+  [code, sig]: [number | null, string | null],
 ) {
+  const result = defaultTestResult(testPath);
+
   const tests: Tests = new Map();
 
   try {
@@ -69,9 +68,19 @@ export function translateArray(
   }
 
   try {
-    pushAsserts(tests, strip, result);
+    // 1: the path of the file itself
+    pushAsserts(tests, 1, result);
   } catch (err) {
     pushExceptionFailure(result, err, 'pushAsserts');
+  }
+
+  if (code || sig) {
+    pushProcessFailure(result, testPath, code, sig);
+  }
+
+  // empty string -> undefined
+  if (!result.failureMessage?.trim()) {
+    delete result.failureMessage;
   }
 
   return result;
@@ -107,7 +116,7 @@ function pushAsserts(
       );
       failureMessages.push(msg);
     }
-    result.failureMessage += failureMessages.join('\n');
+    result.failureMessage += failureMessages.join('\n') + '\n';
     result.testResults.push({
       title: path[path.length - 1],
       fullName: path.join(' // '),
@@ -162,7 +171,7 @@ function bunchUp(arr: TapParserArray, tests: Tests, path: string[] = []) {
   }
 }
 
-export function pushExceptionFailure(
+function pushExceptionFailure(
   result: TestResult,
   err: SerializableError,
   msg: string,
@@ -184,7 +193,27 @@ export function pushExceptionFailure(
   }
 }
 
-export function defaultTestResult(testPath: string): TestResult {
+function pushProcessFailure(
+  result: TestResult,
+  testPath: string,
+  code: number | null,
+  sig: string | null,
+) {
+  result.testResults.push({
+    title: 'process success',
+    fullName: `${testPath} exited successfully`,
+    duration: null,
+    numPassingAsserts: 0,
+    ancestorTitles: [testPath],
+    failureMessages: [`${code} - ${sig}`],
+    location: undefined,
+    status: 'failed',
+  });
+  result.numFailingTests += 1;
+  result.failureMessage += `\n... and the test *file* failed: ${code} ${sig}`;
+}
+
+function defaultTestResult(testPath: string): TestResult {
   const result = createEmptyTestResult();
   result.failureMessage = '';
   result.displayName = testPath;

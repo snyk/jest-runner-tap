@@ -1,10 +1,10 @@
 import { spawn } from 'child_process';
-import type { Writable } from 'stream';
-import type { Config } from '@jest/types';
-import type { JestEnvironment } from '@jest/environment';
-import type Runtime from 'jest-runtime';
-import type { TestResult } from '@jest/test-result';
-import { defaultTestResult, makeParser, translateArray } from './translator';
+import { Writable } from 'stream';
+import { Config } from '@jest/types';
+import { JestEnvironment } from '@jest/environment';
+import Runtime from 'jest-runtime';
+import { TestResult } from '@jest/test-result';
+import { translateResult, makeParser } from './translator';
 import { loadConfig } from './config';
 
 export async function bySpawn(
@@ -18,29 +18,9 @@ export async function bySpawn(
 
   const [parser, output] = makeParser();
 
-  const [code, sig] = await runTapOn(parser, config.tapCommand, testPath);
+  const processResult = await runTapOn(parser, config.tapCommand, testPath);
 
-  const result = defaultTestResult(testPath);
-
-  // 1: the path of the file itself
-  translateArray(result, output, { strip: 1 });
-
-  if (code || sig) {
-    result.testResults.push({
-      title: 'process success',
-      fullName: `${testPath} exited successfully`,
-      duration: null,
-      numPassingAsserts: 0,
-      ancestorTitles: [testPath],
-      failureMessages: [`${code} - ${sig}`],
-      location: undefined,
-      status: 'failed',
-    });
-    result.numFailingTests += 1;
-    result.failureMessage += `\n... and the test *file* failed: ${code} ${sig}`;
-  }
-
-  return result;
+  return translateResult(testPath, output, processResult);
 }
 
 async function runTapOn(
