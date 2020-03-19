@@ -1,18 +1,24 @@
 import { spawn } from 'child_process';
 import type { Writable } from 'stream';
+import type { Config } from '@jest/types';
+import type { JestEnvironment } from '@jest/environment';
+import type Runtime from 'jest-runtime';
 import type { TestResult } from '@jest/test-result';
-import type { TapBridgeConfig } from './config';
 import { defaultTestResult, makeParser, translateArray } from './translator';
+import { loadConfig } from './config';
 
 export async function bySpawn(
-  config: TapBridgeConfig,
+  globalConfig: Config.GlobalConfig,
+  projectConfig: Config.ProjectConfig,
+  environment: JestEnvironment,
+  runtime: Runtime,
   testPath: string,
 ): Promise<TestResult> {
-  const tapCommand = config.tapCommand;
+  let config = await loadConfig(projectConfig);
 
   const [parser, output] = makeParser();
 
-  const [code, sig] = await runTapOn(parser, tapCommand, testPath);
+  const [code, sig] = await runTapOn(parser, config.tapCommand, testPath);
 
   const result = defaultTestResult(testPath);
 

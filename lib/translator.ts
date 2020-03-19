@@ -1,4 +1,8 @@
-import { createEmptyTestResult, SerializableError, TestResult } from '@jest/test-result';
+import {
+  createEmptyTestResult,
+  SerializableError,
+  TestResult,
+} from '@jest/test-result';
 import { inspect } from 'util';
 import TapParser = require('tap-parser');
 import eventsToArray = require('events-to-array');
@@ -73,13 +77,16 @@ export function translateArray(
   return result;
 }
 
-
-function pushAsserts(tests: Map<string[], TestAssertions>, strip: number, result: TestResult) {
+function pushAsserts(
+  tests: Map<string[], TestAssertions>,
+  strip: number,
+  result: TestResult,
+) {
   const tapSummary = [...tests.entries()].filter(
     ([path]) => path.length > strip,
   );
 
-  for (const [fullPath, {results, time}] of tapSummary) {
+  for (const [fullPath, { results, time }] of tapSummary) {
     // removing the full path
     const path = fullPath.slice(strip);
     const passing = results.filter((r) => r.ok);
@@ -94,7 +101,7 @@ function pushAsserts(tests: Map<string[], TestAssertions>, strip: number, result
     for (const failure of notOkay) {
       let msg = '';
       msg += `  ✕  ${failure.diag?.test || failure.name}\n`;
-      msg += inspect({...failure.diag}, {depth: 3, colors: true}).replace(
+      msg += inspect({ ...failure.diag }, { depth: 3, colors: true }).replace(
         /^/gm,
         '     ',
       );
@@ -124,7 +131,7 @@ function bunchUp(arr: TapParserArray, tests: Tests, path: string[] = []) {
         if (2 !== follower?.length) {
           throw new Error(
             `unexpected child follower value: ${JSON.stringify(follower)}`,
-          )
+          );
         }
         const [assert, result] = follower as [string, Result];
         if ('assert' !== assert) {
@@ -155,7 +162,11 @@ function bunchUp(arr: TapParserArray, tests: Tests, path: string[] = []) {
   }
 }
 
-export function pushExceptionFailure(result: TestResult, err: SerializableError, msg: string) {
+export function pushExceptionFailure(
+  result: TestResult,
+  err: SerializableError,
+  msg: string,
+) {
   result.testResults.push({
     title: `${msg} success`,
     fullName: `could ${msg} successfully`,
