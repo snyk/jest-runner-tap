@@ -1,8 +1,7 @@
 import * as fs from 'fs-extra';
-import { Writable } from 'stream';
 import TapParser = require('tap-parser');
+import type { Result } from 'tap-parser';
 import { inspect } from 'util';
-import { Result } from '../lib/translator';
 
 interface ChildResult {
   kind: 'child';
@@ -18,28 +17,28 @@ interface AssertResult {
 type ResultyThing = ChildResult | AssertResult;
 
 class Grabber {
-  ours: ResultyThing[] = [];
-  currentChild?: Grabber;
+  readonly ours: ResultyThing[] = [];
+  private currentChild?: Grabber;
 
-  constructor(parent: ResultyThing[], parser: TapParser) {
+  constructor(parser: TapParser) {
     parser.on('child', (child) => {
       if (undefined !== this.currentChild) {
         throw new Error(
           'new child while we still had events: ' + inspect(this.ours),
         );
       }
-      this.currentChild = new Grabber(this.ours, child);
+      this.currentChild = new Grabber(child);
     });
     parser.on('assert', (result) => {
       if (undefined !== this.currentChild) {
-        parent.push({
+        this.ours.push({
           kind: 'child',
           result,
-          children: [...this.ours],
+          children: [...this.currentChild.ours],
         });
         this.currentChild = undefined;
       } else {
-        parent.push({
+        this.ours.push({
           kind: 'assert',
           result,
         });
@@ -51,16 +50,15 @@ class Grabber {
 describe('manual parser', () => {
   it('nests', async () => {
     const parser = new TapParser();
-    const buffer: ResultyThing[] = [];
-    new Grabber(buffer, parser);
+    const grabber = new Grabber(parser);
     // parser.on('child', (child) => console.log(typeof child));
     // parser.on('assert', (ass) => console.log(typeof ass));
     await feed('./fixtures/one.tap', parser);
-    console.dir(inspect(buffer, false, 8));
+    console.dir(inspect(grabber.ours, false, 8));
   });
 });
 
-async function feed(tapFile: string, parser: Writable): Promise<void> {
+async function feed(tapFile: string, parser: NodeJS.WritableStream): Promise<void> {
   return new Promise((resolve, reject) => {
     const fullPath = require.resolve(tapFile);
     const stream = fs.createReadStream(fullPath);
