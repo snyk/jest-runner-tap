@@ -1,0 +1,25 @@
+TAP version 13
+ok 1 - deep.js # time=19.627ms {
+    # Subtest: first
+        # Subtest: second
+            # Subtest: third
+                # Subtest: fourth
+                    ok 1 - inside
+                    1..1
+                ok 1 - fourth # time=2.536ms
+                
+                1..1
+            ok 1 - third # time=7.758ms
+            
+            1..1
+        ok 1 - second # time=11.519ms
+        
+        1..1
+    ok 1 - first # time=15.043ms
+    
+    1..1
+    # time=19.627ms
+}
+
+1..1
+# time=205.282ms

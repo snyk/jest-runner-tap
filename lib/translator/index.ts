@@ -4,15 +4,8 @@ import {
   pushExceptionFailure,
   pushProcessFailure,
 } from './render';
-import type { Result } from 'tap-parser';
 import { flatten } from '../tree/flatten';
 import { BuildTree } from '../tree/builder';
-
-type TapParserArray = Array<PChild | PAssert>;
-type PChild = ['child', TapParserArray];
-type PAssert = ['assert', Result];
-
-export type TestAssertions = { results: Result[]; time: number };
 
 // it is up to the caller to make sure the returned array is only read after the parser is complete
 export function makeParser(): [TapParser, BuildTree] {
