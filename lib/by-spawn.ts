@@ -15,11 +15,18 @@ export async function bySpawn(
 ): Promise<TestResult> {
   let config = await loadConfig(projectConfig);
 
+  const context = {
+    testPath,
+    globalConfig,
+    projectConfig,
+    maskErrors: true,
+  };
+
   const [parser, output] = makeParser();
 
   const processResult = await runTapOn(parser, config.tapCommand, testPath);
 
-  return translateResult(testPath, output, processResult);
+  return translateResult(context, output, processResult);
 }
 
 async function runTapOn(

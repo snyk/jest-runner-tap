@@ -1,3 +1,4 @@
+import * as path from 'path';
 import * as fs from 'fs-extra';
 import type { AssertionResult } from '@jest/test-result';
 import { makeParser, translateResult } from '../lib/translator';
@@ -111,5 +112,15 @@ export async function testTranslation(tapFile: string) {
     stream.pipe(parser);
   }));
 
-  return translateResult(tapFile, output, [0, null]);
+  const rootDir = path.join(__dirname, 'fixtures');
+  return translateResult({
+    testPath: tapFile.replace('\.tap', '.js'),
+    globalConfig: {
+      rootDir,
+    } as any,
+    projectConfig: {
+      rootDir,
+    } as any,
+    maskErrors: false,
+  }, output, [0, null]);
 }

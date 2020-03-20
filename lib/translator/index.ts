@@ -1,11 +1,9 @@
 import { createEmptyTestResult, TestResult } from '@jest/test-result';
 import TapParser = require('tap-parser');
-import {
-  pushExceptionFailure,
-  pushProcessFailure,
-} from './render';
+import { pushExceptionFailure, pushProcessFailure } from './render';
 import { flatten } from '../tree/flatten';
 import { BuildTree } from '../tree/builder';
+import { Context } from '../context';
 
 // it is up to the caller to make sure the returned array is only read after the parser is complete
 export function makeParser(): [TapParser, BuildTree] {
@@ -17,20 +15,24 @@ export function makeParser(): [TapParser, BuildTree] {
 }
 
 export function translateResult(
-  testPath: string,
+  context: Context,
   builder: BuildTree,
   [code, sig]: [number | null, string | null],
 ) {
-  const result = defaultTestResult(testPath);
+  const result = defaultTestResult(context.testPath);
 
   try {
-    flatten(result, builder);
+    flatten(context, result, builder);
   } catch (err) {
-    pushExceptionFailure(result, err, 'pushAsserts');
+    if (context.maskErrors) {
+      pushExceptionFailure(context, result, err, 'pushAsserts');
+    } else {
+      throw err;
+    }
   }
 
   if (code || sig) {
-    pushProcessFailure(result, testPath, code, sig);
+    pushProcessFailure(result, context.testPath, code, sig);
   }
 
   // empty string -> undefined

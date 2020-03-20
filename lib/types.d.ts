@@ -9,14 +9,38 @@ declare module 'tap-parser' {
   }
 
   namespace TapParser {
+    export interface TapLocation {
+      line: number;
+      column: number;
+      file: string;
+      function: string;
+    }
+
+    export interface ExceptionDiag {
+      tapCaught: 'returnedPromiseRejection';
+
+      test: string;
+      source: string;
+
+      at: TapLocation;
+      type: string;
+      stack: string;
+    }
+
+    export interface FallbackDiag {
+      tapCaught: undefined;
+
+      test?: string;
+    }
+
+    export type Diag = ExceptionDiag | FallbackDiag;
+
     export interface Result {
       ok: boolean;
       id: number;
       time?: number;
       name: string;
-      diag?: {
-        test?: string;
-      };
+      diag?: Diag;
     }
   }
 

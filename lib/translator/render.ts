@@ -4,8 +4,10 @@ import type {
   TestResult,
 } from '@jest/test-result';
 import type { Result } from 'tap-parser';
+import { formatStackTrace } from 'jest-message-util';
+import { Context } from '../context';
 
-export function pushTestResults(result: TestResult, results: Result[], path: string[], time: number | undefined) {
+export function pushTestResults(context: Context, result: TestResult, results: Result[], path: string[], time: number | undefined) {
   const passing = results.filter((r) => r.ok);
   const notOkay = results.filter((r) => !r.ok);
   const passed = notOkay.length === 0;
@@ -20,10 +22,7 @@ export function pushTestResults(result: TestResult, results: Result[], path: str
   for (const failure of notOkay) {
     let msg = '';
     msg += `  ✕  ${failure.diag?.test || failure.name}\n`;
-    msg += inspect({...failure.diag}, {depth: 3, colors: true}).replace(
-      /^/gm,
-      '     ',
-    );
+    msg += renderDiag(context, failure);
     failureMessages.push(msg);
   }
   result.failureMessage += failureMessages.join('\n') + '\n';
@@ -40,7 +39,27 @@ export function pushTestResults(result: TestResult, results: Result[], path: str
   });
 }
 
+function renderDiag(context: Context, failure: Result) {
+  const diag = failure?.diag;
+  if ('returnedPromiseRejection' === diag?.tapCaught) {
+    // undo tap's pretty formatting, and let jest have at it instead
+    const ruined = diag.stack
+      .trimRight()
+      .replace(/\((?!\/)/g, `(${context.globalConfig.rootDir}/`)
+      .replace(/^/mg, ' at ');
+
+    const stackAndMaybeCode = formatStackTrace(ruined, context.projectConfig, context.globalConfig);
+    return `\n    ${diag.type}: ${failure.name}\n${stackAndMaybeCode}`;
+  }
+
+  return inspect({...failure.diag}, {depth: 3, colors: true}).replace(
+    /^/gm,
+    '     ',
+  );
+}
+
 export function pushExceptionFailure(
+  context: Context,
   result: TestResult,
   err: SerializableError,
   msg: string,
