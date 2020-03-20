@@ -1,66 +1,37 @@
 import { createEmptyTestResult, TestResult } from '@jest/test-result';
 import TapParser = require('tap-parser');
-import eventsToArray = require('events-to-array');
 import {
-  pushAsserts,
   pushExceptionFailure,
   pushProcessFailure,
 } from './render';
 import type { Result } from 'tap-parser';
+import { flatten } from '../tree/flatten';
+import { BuildTree } from '../tree/builder';
 
 type TapParserArray = Array<PChild | PAssert>;
 type PChild = ['child', TapParserArray];
 type PAssert = ['assert', Result];
 
 export type TestAssertions = { results: Result[]; time: number };
-type Tests = Map<string[], TestAssertions>;
 
 // it is up to the caller to make sure the returned array is only read after the parser is complete
-export function makeParser(): [TapParser, TapParserArray] {
+export function makeParser(): [TapParser, BuildTree] {
   const parser = new TapParser();
-  const ignore = [
-    'pipe',
-    'unpipe',
-    'prefinish',
-    'finish',
-    'line',
-    'pass',
-    'fail',
-    'todo',
-    'skip',
-    'result',
-    'version',
-    'plan',
-    'comment',
-    'complete',
 
-    // console output(?):
-    'extra',
-  ];
-
-  const output = eventsToArray(parser, ignore) as TapParserArray;
+  const output = new BuildTree(parser);
 
   return [parser, output];
 }
 
 export function translateResult(
   testPath: string,
-  output: Array<PChild | PAssert>,
+  builder: BuildTree,
   [code, sig]: [number | null, string | null],
 ) {
   const result = defaultTestResult(testPath);
 
-  const tests: Tests = new Map();
-
   try {
-    bunchUp(output, tests);
-  } catch (err) {
-    pushExceptionFailure(result, err, 'bunchUp');
-  }
-
-  try {
-    // 1: the path of the file itself
-    pushAsserts(tests, 1, result);
+    flatten(result, builder);
   } catch (err) {
     pushExceptionFailure(result, err, 'pushAsserts');
   }
@@ -75,47 +46,6 @@ export function translateResult(
   }
 
   return result;
-}
-
-function bunchUp(arr: TapParserArray, tests: Tests, path: string[] = []) {
-  for (let i = 0; i < arr.length; ++i) {
-    const el = arr[i];
-    switch (el[0]) {
-      case 'child': {
-        i += 1;
-        const follower = arr[i];
-        if (2 !== follower?.length) {
-          throw new Error(
-            `unexpected child follower value: ${JSON.stringify(follower)}`,
-          );
-        }
-        const [assert, result] = follower as [string, Result];
-        if ('assert' !== assert) {
-          throw new Error(
-            `unexpected child follower type: ${JSON.stringify(follower)}`,
-          );
-        }
-        const newPath = [...path, result.name];
-        tests.set(newPath, {
-          results: [],
-          time: result.time || 0,
-        });
-        bunchUp(el[1], tests, newPath);
-        break;
-      }
-
-      case 'assert': {
-        let state = tests.get(path);
-        if (!state) {
-          throw new Error(
-            'assert for a test that does not exist: ' + JSON.stringify(path),
-          );
-        }
-        state.results.push(el[1]);
-        break;
-      }
-    }
-  }
 }
 
 function defaultTestResult(testPath: string): TestResult {

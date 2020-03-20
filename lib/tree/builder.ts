@@ -2,18 +2,18 @@ import TapParser = require('tap-parser');
 import type { Result } from 'tap-parser';
 import {inspect} from "util";
 
-interface ChildNode {
+export interface ChildNode {
   kind: 'child';
   result: Result;
   children: TreeNode[];
 }
 
-interface AssertNode {
+export interface AssertNode {
   kind: 'assert';
   result: Result;
 }
 
-type TreeNode = ChildNode | AssertNode;
+export type TreeNode = ChildNode | AssertNode;
 
 export class BuildTree {
   readonly ours: TreeNode[] = [];

@@ -18,7 +18,10 @@ describe('manual parser', () => {
   });
 });
 
-async function feed(tapFile: string, parser: NodeJS.WritableStream): Promise<void> {
+async function feed(
+  tapFile: string,
+  parser: NodeJS.WritableStream,
+): Promise<void> {
   return new Promise((resolve, reject) => {
     const fullPath = require.resolve(tapFile);
     const stream = fs.createReadStream(fullPath);

@@ -23,7 +23,7 @@ export function pushAsserts(
 }
 
 
-function pushTestResults(result: TestResult, results: Result[], path: string[], time: number) {
+export function pushTestResults(result: TestResult, results: Result[], path: string[], time: number | undefined) {
   const passing = results.filter((r) => r.ok);
   const notOkay = results.filter((r) => !r.ok);
   const passed = notOkay.length === 0;
