@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`error rendering handles exceptions 1`] = `
+"  ✕  gonna throw
+     {
+       stack: [32m'buggy (type-error.js:14:3)\\\\nTest.<anonymous> (type-error.js:5:3)\\\\n'[39m,
+       at: { line: [33m14[39m, column: [33m3[39m, file: [32m'type-error.js'[39m, function: [32m'buggy'[39m },
+       type: [32m'TypeError'[39m,
+       tapCaught: [32m'returnedPromiseRejection'[39m,
+       test: [32m'gonna throw'[39m,
+       source: [32m'function buggy(value) {\\\\n  value();\\\\n--^\\\\n}\\\\n'[39m
+     }
+
+"
+`;

@@ -101,7 +101,7 @@ describe('translation', () => {
   });
 });
 
-async function testTranslation(tapFile: string) {
+export async function testTranslation(tapFile: string) {
   const [parser, output] = makeParser();
   await new Promise(((resolve, reject) => {
     const fullPath = require.resolve(tapFile);
