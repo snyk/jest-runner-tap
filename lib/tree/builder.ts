@@ -44,4 +44,14 @@ export class BuildTree {
       }
     });
   }
+
+  collapse(path: string[], results: TreeNode[]): void {
+    if (this.ours) {
+      results.push(...this.ours);
+    }
+
+    if (this.currentChild) {
+      this.currentChild.collapse([...path, 'unknown'], results);
+    }
+  }
 }

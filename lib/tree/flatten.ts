@@ -1,6 +1,6 @@
 import type {SerializableError, TestResult} from '@jest/test-result';
 import type { Result } from 'tap-parser';
-import type { BuildTree, ChildNode } from './builder';
+import type { BuildTree, ChildNode, TreeNode } from './builder';
 import { pushExceptionFailure, pushTestResults } from '../translator/render';
 import { Context } from '../context';
 
@@ -13,6 +13,12 @@ export function flatten(context: Context, result: TestResult, builder: BuildTree
   if (events.length > 1) {
     pushExceptionFailure(context, result, new Error('invalid root array length') as SerializableError, 'events.length');
   }
+
+  const path: string[] = [];
+  const results: TreeNode[] = [];
+  builder.ours.length = 0;
+  builder.collapse(path, results);
+  console.log(path, results);
 }
 
 function handle(context: Context, result: TestResult, node: ChildNode, path: string[]): void {

@@ -1,0 +1,45 @@
+TAP version 13
+not ok 1 - timeout.js # time=1047.102ms
+  ---
+  env: {}
+  file: timeout.js
+  timeout: 1000
+  command: /usr/bin/node
+  args:
+    - -r
+    - /home/faux/code/jest-runner-tap/node_modules/esm/esm.js
+    - timeout.js
+  stdio:
+    - 0
+    - pipe
+    - 2
+  cwd: /home/faux/code/jest-runner-tap/test/fixtures
+  failures:
+    - tapError: no plan
+  exitCode: null
+  signal: SIGTERM
+  ...
+{
+    # Subtest: alpha
+        ok 1 - first test
+        1..1
+    ok 1 - alpha # time=213.201ms
+    
+    # Subtest: bravo
+        ok 1 - before
+        not ok 2 - timeout!
+          ---
+          signal: SIGTERM
+          expired: TAP
+          test: bravo
+          ...
+        
+        1..2
+        # failed 1 of 2 tests
+    # test count(1) != plan(null)
+    # failed 1 test
+}
+
+1..1
+# failed 1 test
+# time=1069.063ms
