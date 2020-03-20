@@ -45,12 +45,13 @@ export function pushTestResults(result: TestResult, results: Result[], path: str
     failureMessages.push(msg);
   }
   result.failureMessage += failureMessages.join('\n') + '\n';
+  const root = 0 === path.length;
   result.testResults.push({
-    title: path[path.length - 1],
-    fullName: path.join(' // '),
+    title: root ? '⊥' : path[path.length - 1],
+    fullName: root ? 'assertions at the top level' : path.join(' // '),
     duration: time,
     numPassingAsserts: passing.length,
-    ancestorTitles: path.slice(1),
+    ancestorTitles: path.slice(0, path.length - 1),
     failureMessages,
     location: undefined,
     status: passed ? 'passed' : 'failed',
