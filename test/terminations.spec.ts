@@ -17,7 +17,14 @@ describe('translation of terminations', () => {
         failureMessages: [],
         ancestorTitles: [],
       } as Partial<AssertionResult>),
+      expect.objectContaining({
+        title: 'bravo (synthetic; test exploded)',
+        status: 'failed',
+        numPassingAsserts: 1,
+        ancestorTitles: [],
+      } as Partial<AssertionResult>),
     ]);
     expect(result.testResults[0].duration).toBeGreaterThan(0);
+    expect(result.testResults[1].failureMessages).toHaveLength(1);
   });
 });

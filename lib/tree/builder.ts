@@ -18,18 +18,31 @@ export type TreeNode = ChildNode | AssertNode;
 export class BuildTree {
   private readonly ours: TreeNode[] = [];
   private currentChild?: BuildTree;
-  private readonly comments: string[] = [];
 
-  constructor(parser: TapParser) {
-    parser.on('comment', (comment) => this.comments.push(comment));
+  private readonly guessedName?: string;
+  private nextSubTestName?: string;
+
+  constructor(parser: TapParser, guessedName?: string) {
+    this.guessedName = guessedName;
+
+    parser.on('line', (line) => {
+      line = line.trim();
+      // 'comment' events are mangled for subtests; return the file name?
+      const prefix = '# Subtest: ';
+      if (line.startsWith(prefix)) {
+        this.nextSubTestName = line.slice(prefix.length).trim();
+      }
+    });
+
     parser.on('child', (child) => {
       if (undefined !== this.currentChild) {
         throw new Error(
           `new child while we still had events: ${inspect(this.ours)}`,
         );
       }
-      this.currentChild = new BuildTree(child);
+      this.currentChild = new BuildTree(child, this.nextSubTestName);
     });
+
     parser.on('assert', (result) => {
       if (undefined !== this.currentChild) {
         this.ours.push({
@@ -49,7 +62,16 @@ export class BuildTree {
 
   finished(): TreeNode[] {
     if (this.currentChild) {
-      this.ours.push(...this.currentChild.finished());
+      this.ours.push({
+        kind: 'child',
+        result: {
+          id: -1,
+          ok: false,
+          // who knows; the child's name is better (populated) for timeout
+          name: `${this.currentChild.guessedName} (synthetic; test exploded)`,
+        },
+        children: [...this.currentChild.finished()],
+      });
     }
     return this.ours;
   }
