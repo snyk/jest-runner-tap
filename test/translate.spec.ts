@@ -80,6 +80,25 @@ describe('translation', () => {
     ]);
     expect(result.testResults[0].duration).toBeGreaterThan(0);
   });
+
+  it('handles multiple levels of test nesting', async () => {
+    const result = await testTranslation('./fixtures/deep.tap');
+    expect(result.failureMessage).toBeUndefined();
+    expect(result.numFailingTests).toBe(0);
+    expect(result.numPendingTests).toBe(0);
+    expect(result.numPassingTests).toBe(1);
+    expect(result.skipped).toBe(false);
+    expect(result.testResults).toStrictEqual([
+      expect.objectContaining({
+        title: 'fourth',
+        status: 'passed',
+        numPassingAsserts: 1,
+        failureMessages: [],
+        ancestorTitles: ['first', 'second', 'third'],
+      } as Partial<AssertionResult>),
+    ]);
+    expect(result.testResults[0].duration).toBeGreaterThan(0);
+  });
 });
 
 async function testTranslation(tapFile: string) {
