@@ -3,12 +3,7 @@
 exports[`translation of terminations handles a test which timed out 1`] = `
 "
   ✕  bravo
-     Result {
-       ok: <yellow>false</>,
-       id: <yellow>2</>,
-       name: <green>'timeout!'</>,
-       diag: { signal: <green>'SIGTERM'</>, expired: <green>'TAP'</>, test: <green>'bravo'</> },
-       fullname: <green>'timeout.js bravo'</>
-     }
+
+    Timeout! SIGTERM triggered by TAP during bravo
 "
 `;

@@ -20,6 +20,7 @@ declare module 'tap-parser' {
 
     export interface ExceptionDiag {
       tapCaught: 'returnedPromiseRejection';
+      signal: undefined;
 
       test: string;
       source: string;
@@ -29,20 +30,29 @@ declare module 'tap-parser' {
       stack: string;
     }
 
+    export interface TimeoutDiag {
+      tapCaught: undefined;
+
+      signal: NodeJS.Signals;
+      expired: string;
+      test: string;
+    }
+
     export interface FallbackDiag {
       tapCaught: undefined;
+      signal: undefined;
 
       test?: string;
     }
 
-    export type Diag = ExceptionDiag | FallbackDiag;
+    export type Diag = ExceptionDiag | TimeoutDiag | FallbackDiag;
 
-    export interface Result {
+    export interface Result<D = Diag | undefined> {
       ok: boolean;
       id: number;
       time?: number;
       name: string;
-      diag?: Diag;
+      diag: D;
     }
   }
 
