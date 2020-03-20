@@ -48,12 +48,16 @@ class Grabber {
 }
 
 describe('manual parser', () => {
-  it('nests', async () => {
+  it('handles one', async () => {
     const parser = new TapParser();
     const grabber = new Grabber(parser);
-    // parser.on('child', (child) => console.log(typeof child));
-    // parser.on('assert', (ass) => console.log(typeof ass));
     await feed('./fixtures/one.tap', parser);
+    console.dir(inspect(grabber.ours, false, 8));
+  });
+  it('handles two', async () => {
+    const parser = new TapParser();
+    const grabber = new Grabber(parser);
+    await feed('./fixtures/two.tap', parser);
     console.dir(inspect(grabber.ours, false, 8));
   });
 });

@@ -1,0 +1,20 @@
+TAP version 13
+ok 1 - two.js # time=9.888ms {
+    # Subtest: alpha
+        ok 1 - should be equal
+        ok 2 - should be equal
+        1..2
+    ok 1 - alpha # time=4.142ms
+    
+    # Subtest: bravo
+        ok 1 - should be equal
+        ok 2 - should be equal
+        1..2
+    ok 2 - bravo # time=0.655ms
+    
+    1..2
+    # time=9.888ms
+}
+
+1..1
+# time=231.858ms
