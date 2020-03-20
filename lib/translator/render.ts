@@ -52,7 +52,7 @@ function renderDiag(context: Context, failure: Result) {
     return `\n    ${diag.type}: ${failure.name}\n${stackAndMaybeCode}`;
   }
 
-  return inspect({...failure.diag}, {depth: 3, colors: true}).replace(
+  return inspect(failure, {depth: 3, colors: true}).replace(
     /^/gm,
     '     ',
   );

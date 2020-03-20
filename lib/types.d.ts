@@ -4,8 +4,9 @@ declare module 'tap-parser' {
   interface TapParser extends NodeJS.WritableStream {}
 
   class TapParser {
-    on(event: 'child', handler: (child: TapParser) => void): this;
     on(event: 'assert', handler: (result: Result) => void): this;
+    on(event: 'child', handler: (child: TapParser) => void): this;
+    on(event: 'comment', handler: (comment: string) => void): this;
   }
 
   namespace TapParser {

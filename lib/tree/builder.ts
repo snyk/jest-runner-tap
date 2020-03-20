@@ -16,10 +16,12 @@ export interface AssertNode {
 export type TreeNode = ChildNode | AssertNode;
 
 export class BuildTree {
-  readonly ours: TreeNode[] = [];
+  private readonly ours: TreeNode[] = [];
   private currentChild?: BuildTree;
+  private readonly comments: string[] = [];
 
   constructor(parser: TapParser) {
+    parser.on('comment', (comment) => this.comments.push(comment));
     parser.on('child', (child) => {
       if (undefined !== this.currentChild) {
         throw new Error(
@@ -33,7 +35,7 @@ export class BuildTree {
         this.ours.push({
           kind: 'child',
           result,
-          children: [...this.currentChild.ours],
+          children: [...this.currentChild.finished()],
         });
         this.currentChild = undefined;
       } else {
@@ -45,13 +47,10 @@ export class BuildTree {
     });
   }
 
-  collapse(path: string[], results: TreeNode[]): void {
-    if (this.ours) {
-      results.push(...this.ours);
-    }
-
+  finished(): TreeNode[] {
     if (this.currentChild) {
-      this.currentChild.collapse([...path, 'unknown'], results);
+      this.ours.push(...this.currentChild.finished());
     }
+    return this.ours;
   }
 }
