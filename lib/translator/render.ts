@@ -4,24 +4,6 @@ import type {
   TestResult,
 } from '@jest/test-result';
 import type { Result } from 'tap-parser';
-import type { TestAssertions } from './index';
-
-export function pushAsserts(
-  tests: Map<string[], TestAssertions>,
-  strip: number,
-  result: TestResult,
-) {
-  const tapSummary = [...tests.entries()].filter(
-    ([path]) => path.length > strip,
-  );
-
-  for (const [fullPath, { results, time }] of tapSummary) {
-    // removing the full path
-    const path = fullPath.slice(strip);
-    pushTestResults(result, results, path, time);
-  }
-}
-
 
 export function pushTestResults(result: TestResult, results: Result[], path: string[], time: number | undefined) {
   const passing = results.filter((r) => r.ok);
