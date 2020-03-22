@@ -33,10 +33,10 @@ export function pushTestResults(
     msg +=
       chalk.bold.red(
         '  ' +
-        TITLE_BULLET +
-        path.join(ANCESTRY_SEPARATOR) +
-        (path.length ? ANCESTRY_SEPARATOR : '') +
-        failureName,
+          TITLE_BULLET +
+          path.join(ANCESTRY_SEPARATOR) +
+          (path.length ? ANCESTRY_SEPARATOR : '') +
+          failureName,
       ) + '\n\n';
     msg += renderDiag(context, failure).trimRight();
     msg += '\n';
@@ -96,7 +96,9 @@ export function pushProcessFailure(
     status: 'failed',
   });
   result.numFailingTests += 1;
-  result.failureMessage += `\n    ... and ${chalk.red(`the test ${chalk.bold('file')} failed`)} `;
+  result.failureMessage += `\n    ... and ${chalk.red(
+    `the test ${chalk.bold('file')} failed`,
+  )} `;
   if (code) {
     result.failureMessage += `with an exit code, ${chalk.red(code)}`;
   }
