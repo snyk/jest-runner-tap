@@ -1,6 +1,6 @@
 TAP ?= ../../node_modules/.bin/tap
 
-all: $(patsubst %.js,%.tap,$(wildcard *.js))
+all: $(patsubst %.test.js,%.tap,$(wildcard *.js))
 
-%.tap: %.js
-	-$(TAP) --no-coverage -R tap --timeout=1 $*.js > $*.tap
+%.tap: %.test.js
+	-$(TAP) --no-coverage -R tap --timeout=1 $*.test.js > $*.tap
