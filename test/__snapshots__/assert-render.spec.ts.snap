@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`assert rendering handles equal 1`] = `
-"  ✕  is equal
+"  <red>✕</> is equal
 
     We failed to fully process the tap output:
     name: is equal
@@ -29,7 +29,7 @@ exports[`assert rendering handles equal 1`] = `
 `;
 
 exports[`assert rendering handles notOk 1`] = `
-"  ✕  is notOk
+"  <red>✕</> is notOk
 
     We failed to fully process the tap output:
     name: is notOk
@@ -54,7 +54,7 @@ exports[`assert rendering handles notOk 1`] = `
 `;
 
 exports[`assert rendering handles ok 1`] = `
-"  ✕  is ok
+"  <red>✕</> is ok
 
     We failed to fully process the tap output:
     name: is ok
@@ -79,7 +79,7 @@ exports[`assert rendering handles ok 1`] = `
 `;
 
 exports[`assert rendering handles same 1`] = `
-"  ✕  is same
+"  <red>✕</> is same
 
     We failed to fully process the tap output:
     name: is same

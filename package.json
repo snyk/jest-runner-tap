@@ -15,8 +15,10 @@
   "author": "Chris West (Faux) <solo-npm@goeswhere.com>",
   "dependencies": {
     "@jest/test-result": "^25.1.0",
+    "chalk": "^3.0.0",
     "jest-config": "^25.1.0",
     "jest-message-util": "^25.1.0",
+    "jest-util": "^25.1.0",
     "lodash.clonedeep": "^4.5.0",
     "tap-parser": "^10.0.1",
     "tslib": "^1.11.1",

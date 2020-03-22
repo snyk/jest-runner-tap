@@ -2,7 +2,7 @@
 
 exports[`translation of terminations handles a test which timed out 1`] = `
 "
-  ✕  bravo
+  <red>✕</> bravo
 
     We failed to fully process the tap output:
     name: timeout!

@@ -1,5 +1,7 @@
 import type { SerializableError, TestResult } from '@jest/test-result';
+import { specialChars } from 'jest-util';
 import type { Result } from 'tap-parser';
+import chalk = require('chalk');
 import type { Context } from '../context';
 import { renderDiag } from './diag';
 
@@ -23,7 +25,8 @@ export function pushTestResults(
   const failureMessages: string[] = [];
   for (const failure of notOkay) {
     let msg = '';
-    msg += `  ✕  ${failure.diag?.test || failure.name}\n\n`;
+    const title = failure.diag?.test || failure.name;
+    msg += `  ${chalk.red(specialChars.ICONS.failed)} ${title}\n\n`;
     msg += renderDiag(context, failure).trimRight();
     msg += '\n';
     failureMessages.push(msg);
