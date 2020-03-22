@@ -43,6 +43,10 @@ declare module 'tap-parser' {
       signal: undefined;
 
       test?: string;
+
+      at?: TapLocation;
+      stack?: string;
+      source?: string;
     }
 
     export type Diag = ExceptionDiag | TimeoutDiag | FallbackDiag;

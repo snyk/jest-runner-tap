@@ -3,107 +3,85 @@
 exports[`assert rendering handles equal 1`] = `
 "  <red>✕</> is equal
 
-    We failed to fully process the tap output:
-    name: is equal
-    diag:
-      found: false
-      wanted: true
-      compare: ===
-      at:
-        line: 7
-        column: 7
-        file: assertions.test.js
-        type: Test
-      stack: |
-        Test.<anonymous> (assertions.test.js:7:7)
-        Test.<anonymous> (assertions.test.js:4:11)
-        Object.<anonymous> (assertions.test.js:3:1)
-      source: |2
-            t.notOk(true, 'is notOk');
-            t.equal(false, true, 'is equal');
-        ------^
-            t.same(false, true, 'is same');
-          });
-    fullname: assertions.test.js assertions equality
+      found: <green>true</>
+     wanted: <red>false</>
+    compare: ===
+    
+        The failure occurred here:
+    
+    </> <gray>  5 | </>    t<yellow>.</>ok(<cyan>false</><yellow>,</> <green>'is ok'</>)<yellow>;</></>
+    </> <gray>  6 | </>    t<yellow>.</>notOk(<cyan>true</><yellow>,</> <green>'is notOk'</>)<yellow>;</></>
+    </><red><bold>></></><gray>  7 | </>    t<yellow>.</>equal(<cyan>false</><yellow>,</> <cyan>true</><yellow>,</> <green>'is equal'</>)<yellow>;</></>
+    </> <gray>    | </>      <red><bold>^</></></>
+    </> <gray>  8 | </>    t<yellow>.</>same(<cyan>false</><yellow>,</> <cyan>true</><yellow>,</> <green>'is same'</>)<yellow>;</></>
+    </> <gray>  9 | </>  })<yellow>;</></>
+    </> <gray> 10 | </></>
+
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:7:7)</>
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:4:11)</>
+      <dim>at Object.<anonymous> (</>assertions.test.js<dim>:3:1)</>
 "
 `;
 
 exports[`assert rendering handles notOk 1`] = `
 "  <red>✕</> is notOk
 
-    We failed to fully process the tap output:
-    name: is notOk
-    diag:
-      at:
-        line: 6
-        column: 7
-        file: assertions.test.js
-        type: Test
-      stack: |
-        Test.<anonymous> (assertions.test.js:6:7)
-        Test.<anonymous> (assertions.test.js:4:11)
-        Object.<anonymous> (assertions.test.js:3:1)
-      source: |2
-            t.ok(false, 'is ok');
-            t.notOk(true, 'is notOk');
-        ------^
-            t.equal(false, true, 'is equal');
-            t.same(false, true, 'is same');
-    fullname: assertions.test.js assertions equality
+    The failure occurred here:
+    
+    </> <gray> 4 | </>  await t<yellow>.</>test(<green>'equality'</><yellow>,</> async (t) <yellow>=></> {</>
+    </> <gray> 5 | </>    t<yellow>.</>ok(<cyan>false</><yellow>,</> <green>'is ok'</>)<yellow>;</></>
+    </><red><bold>></></><gray> 6 | </>    t<yellow>.</>notOk(<cyan>true</><yellow>,</> <green>'is notOk'</>)<yellow>;</></>
+    </> <gray>   | </>      <red><bold>^</></></>
+    </> <gray> 7 | </>    t<yellow>.</>equal(<cyan>false</><yellow>,</> <cyan>true</><yellow>,</> <green>'is equal'</>)<yellow>;</></>
+    </> <gray> 8 | </>    t<yellow>.</>same(<cyan>false</><yellow>,</> <cyan>true</><yellow>,</> <green>'is same'</>)<yellow>;</></>
+    </> <gray> 9 | </>  })<yellow>;</></>
+
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:6:7)</>
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:4:11)</>
+      <dim>at Object.<anonymous> (</>assertions.test.js<dim>:3:1)</>
 "
 `;
 
 exports[`assert rendering handles ok 1`] = `
 "  <red>✕</> is ok
 
-    We failed to fully process the tap output:
-    name: is ok
-    diag:
-      at:
-        line: 5
-        column: 7
-        file: assertions.test.js
-        type: Test
-      stack: |
-        Test.<anonymous> (assertions.test.js:5:7)
-        Test.<anonymous> (assertions.test.js:4:11)
-        Object.<anonymous> (assertions.test.js:3:1)
-      source: |2
-          await t.test('equality', async (t) => {
-            t.ok(false, 'is ok');
-        ------^
-            t.notOk(true, 'is notOk');
-            t.equal(false, true, 'is equal');
-    fullname: assertions.test.js assertions equality
+    The failure occurred here:
+    
+    </> <gray> 3 | </>test(<green>'assertions'</><yellow>,</> async (t) <yellow>=></> {</>
+    </> <gray> 4 | </>  await t<yellow>.</>test(<green>'equality'</><yellow>,</> async (t) <yellow>=></> {</>
+    </><red><bold>></></><gray> 5 | </>    t<yellow>.</>ok(<cyan>false</><yellow>,</> <green>'is ok'</>)<yellow>;</></>
+    </> <gray>   | </>      <red><bold>^</></></>
+    </> <gray> 6 | </>    t<yellow>.</>notOk(<cyan>true</><yellow>,</> <green>'is notOk'</>)<yellow>;</></>
+    </> <gray> 7 | </>    t<yellow>.</>equal(<cyan>false</><yellow>,</> <cyan>true</><yellow>,</> <green>'is equal'</>)<yellow>;</></>
+    </> <gray> 8 | </>    t<yellow>.</>same(<cyan>false</><yellow>,</> <cyan>true</><yellow>,</> <green>'is same'</>)<yellow>;</></>
+
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:5:7)</>
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:4:11)</>
+      <dim>at Object.<anonymous> (</>assertions.test.js<dim>:3:1)</>
 "
 `;
 
 exports[`assert rendering handles same 1`] = `
 "  <red>✕</> is same
 
-    We failed to fully process the tap output:
-    name: is same
-    diag:
-      diff: |
-        --- expected
-        +++ actual
-        @@ -1,1 +1,1 @@
-        -true
-        +false
-      at:
-        line: 8
-        column: 7
-        file: assertions.test.js
-        type: Test
-      stack: |
-        Test.<anonymous> (assertions.test.js:8:7)
-        Test.<anonymous> (assertions.test.js:4:11)
-        Object.<anonymous> (assertions.test.js:3:1)
-      source: |2
-            t.equal(false, true, 'is equal');
-            t.same(false, true, 'is same');
-        ------^
-          });
-    fullname: assertions.test.js assertions equality
+         <red>--- expected</>
+         <green>+++ actual</>
+         <yellow>@@ -1,1 +1,1 @@</>
+         <red>-true</>
+         <green>+false</>
+         
+             The failure occurred here:
+    
+    </> <gray>  6 | </>    t<yellow>.</>notOk(<cyan>true</><yellow>,</> <green>'is notOk'</>)<yellow>;</></>
+    </> <gray>  7 | </>    t<yellow>.</>equal(<cyan>false</><yellow>,</> <cyan>true</><yellow>,</> <green>'is equal'</>)<yellow>;</></>
+    </><red><bold>></></><gray>  8 | </>    t<yellow>.</>same(<cyan>false</><yellow>,</> <cyan>true</><yellow>,</> <green>'is same'</>)<yellow>;</></>
+    </> <gray>    | </>      <red><bold>^</></></>
+    </> <gray>  9 | </>  })<yellow>;</></>
+    </> <gray> 10 | </></>
+    </> <gray> 11 | </>  await t<yellow>.</>test(<green>'errors'</><yellow>,</> async (t) <yellow>=></> {</>
+
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:8:7)</>
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:4:11)</>
+      <dim>at Object.<anonymous> (</>assertions.test.js<dim>:3:1)</>
 "
 `;

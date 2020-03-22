@@ -17,6 +17,7 @@
     "@jest/test-result": "^25.1.0",
     "chalk": "^3.0.0",
     "jest-config": "^25.1.0",
+    "jest-matcher-utils": "^25.1.0",
     "jest-message-util": "^25.1.0",
     "jest-util": "^25.1.0",
     "lodash.clonedeep": "^4.5.0",
