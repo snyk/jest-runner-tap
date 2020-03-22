@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`error rendering handles exceptions 1`] = `
-"  <red>✕</> gonna throw
+"<bold><red>  <bold>● </><bold>gonna throw › gonna throw</></>
 
     TypeError: value is not a function
 

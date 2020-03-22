@@ -97,7 +97,7 @@ export function renderDiag(context: Context, origFailure: Result): string {
   }
 
   if (msg) {
-    return `${msg}\n\n${fallback(failure)}`;
+    return `${msg}\n${fallback(failure)}`;
   }
 
   return fallback(failure);
@@ -184,7 +184,7 @@ function renderException(context: Context, failure: Result<ExceptionDiag>) {
 }
 
 function indent(val: string, by = '    '): string {
-  return val.replace(/^/gm, by);
+  return val.replace(/^(?!\s*$)/gm, by);
 }
 
 function isEmpty(val: object | undefined): val is {} {

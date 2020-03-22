@@ -1,9 +1,11 @@
 import type { SerializableError, TestResult } from '@jest/test-result';
-import { specialChars } from 'jest-util';
 import type { Result } from 'tap-parser';
 import chalk = require('chalk');
 import type { Context } from '../context';
 import { renderDiag } from './diag';
+
+const ANCESTRY_SEPARATOR = ' \u203A ';
+const TITLE_BULLET = chalk.bold('\u25cf ');
 
 export function pushTestResults(
   context: Context,
@@ -25,8 +27,17 @@ export function pushTestResults(
   const failureMessages: string[] = [];
   for (const failure of notOkay) {
     let msg = '';
-    const title = failure.diag?.test || failure.name;
-    msg += `  ${chalk.red(specialChars.ICONS.failed)} ${title}\n\n`;
+    const failureName = failure.diag?.test || failure.name;
+
+    // copied from: https://github.com/facebook/jest/blob/d7a7b4294a4507030f86fe4f78e1790f53d0bda9/packages/jest-message-util/src/index.ts#L319
+    msg +=
+      chalk.bold.red(
+        '  ' +
+        TITLE_BULLET +
+        path.join(ANCESTRY_SEPARATOR) +
+        (path.length ? ANCESTRY_SEPARATOR : '') +
+        failureName,
+      ) + '\n\n';
     msg += renderDiag(context, failure).trimRight();
     msg += '\n';
     failureMessages.push(msg);

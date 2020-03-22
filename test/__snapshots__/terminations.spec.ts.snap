@@ -3,10 +3,10 @@
 exports[`translation of terminations handles a test which timed out 1`] = `
 "
 
-  <red>✕</> bravo
+<bold><red>  <bold>● </><bold>bravo (synthetic; test exploded) › bravo</></>
 
     Additionally, <gray>tap</> said:
-    
+
     name: timeout!
     diag:
       signal: SIGTERM

@@ -10,7 +10,7 @@ describe('assert rendering', () => {
   function findAssert(name: string) {
     for (const test of result.testResults) {
       for (const message of test.failureMessages) {
-        if (message.split('\n')[0].trim().endsWith(name)) {
+        if (message.split('\n')[0].trim().includes(name)) {
           return message;
         }
       }

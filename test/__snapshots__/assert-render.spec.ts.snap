@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`assert rendering handles equal 1`] = `
-"  <red>✕</> is equal
+"<bold><red>  <bold>● </><bold>assertions › equality › is equal</></>
 
       found: <green>true</>
      wanted: <red>false</>
     compare: ===
-    
-        The failure occurred here:
-    
+
+    The failure occurred here:
+
     </> <gray>  5 | </>    t<yellow>.</>ok(<cyan>false</><yellow>,</> <green>'is ok'</>)<yellow>;</></>
     </> <gray>  6 | </>    t<yellow>.</>notOk(<cyan>true</><yellow>,</> <green>'is notOk'</>)<yellow>;</></>
     </><red><bold>></></><gray>  7 | </>    t<yellow>.</>equal(<cyan>false</><yellow>,</> <cyan>true</><yellow>,</> <green>'is equal'</>)<yellow>;</></>
@@ -24,10 +24,10 @@ exports[`assert rendering handles equal 1`] = `
 `;
 
 exports[`assert rendering handles notOk 1`] = `
-"  <red>✕</> is notOk
+"<bold><red>  <bold>● </><bold>assertions › equality › is notOk</></>
 
     The failure occurred here:
-    
+
     </> <gray> 4 | </>  await t<yellow>.</>test(<green>'equality'</><yellow>,</> async (t) <yellow>=></> {</>
     </> <gray> 5 | </>    t<yellow>.</>ok(<cyan>false</><yellow>,</> <green>'is ok'</>)<yellow>;</></>
     </><red><bold>></></><gray> 6 | </>    t<yellow>.</>notOk(<cyan>true</><yellow>,</> <green>'is notOk'</>)<yellow>;</></>
@@ -43,10 +43,10 @@ exports[`assert rendering handles notOk 1`] = `
 `;
 
 exports[`assert rendering handles ok 1`] = `
-"  <red>✕</> is ok
+"<bold><red>  <bold>● </><bold>assertions › equality › is ok</></>
 
     The failure occurred here:
-    
+
     </> <gray> 3 | </>test(<green>'assertions'</><yellow>,</> async (t) <yellow>=></> {</>
     </> <gray> 4 | </>  await t<yellow>.</>test(<green>'equality'</><yellow>,</> async (t) <yellow>=></> {</>
     </><red><bold>></></><gray> 5 | </>    t<yellow>.</>ok(<cyan>false</><yellow>,</> <green>'is ok'</>)<yellow>;</></>
@@ -62,16 +62,16 @@ exports[`assert rendering handles ok 1`] = `
 `;
 
 exports[`assert rendering handles same 1`] = `
-"  <red>✕</> is same
+"<bold><red>  <bold>● </><bold>assertions › equality › is same</></>
 
          <red>--- expected</>
          <green>+++ actual</>
          <yellow>@@ -1,1 +1,1 @@</>
          <red>-true</>
          <green>+false</>
-         
-             The failure occurred here:
-    
+
+    The failure occurred here:
+
     </> <gray>  6 | </>    t<yellow>.</>notOk(<cyan>true</><yellow>,</> <green>'is notOk'</>)<yellow>;</></>
     </> <gray>  7 | </>    t<yellow>.</>equal(<cyan>false</><yellow>,</> <cyan>true</><yellow>,</> <green>'is equal'</>)<yellow>;</></>
     </><red><bold>></></><gray>  8 | </>    t<yellow>.</>same(<cyan>false</><yellow>,</> <cyan>true</><yellow>,</> <green>'is same'</>)<yellow>;</></>
