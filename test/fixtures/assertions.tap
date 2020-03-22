@@ -1,5 +1,5 @@
 TAP version 13
-not ok 1 - assertions.test.js # time=64.115ms
+not ok 1 - assertions.test.js # time=64.324ms
   ---
   env: {}
   file: assertions.test.js
@@ -105,7 +105,7 @@ not ok 1 - assertions.test.js # time=64.115ms
             
             1..4
             # failed 4 of 4 tests
-        not ok 1 - equality # time=30.844ms
+        not ok 1 - equality # time=30.784ms
         
         # Subtest: errors
             not ok 1 - is not error
@@ -191,7 +191,7 @@ not ok 1 - assertions.test.js # time=64.115ms
                     }, 'is not thrown');
               ...
             
-            not ok 4 - is rejected
+            not ok 4 - is resolved
               ---
               at:
                 line: 19
@@ -219,7 +219,7 @@ not ok 1 - assertions.test.js # time=64.115ms
                     await t.resolves(async () => {
                 ------------^
                       throw new Error('bam!');
-                    }, 'is rejected');
+                    }, 'is resolved');
               ...
             
             not ok 5 - is rejected
@@ -231,7 +231,7 @@ not ok 1 - assertions.test.js # time=64.115ms
                 type: Test
               found: all good!
               source: |2
-                    }, 'is rejected');
+                    }, 'is resolved');
                     await t.rejects(async () => 'all good!', 'is rejected');
                 ------------^
                   });
@@ -240,17 +240,17 @@ not ok 1 - assertions.test.js # time=64.115ms
             
             1..5
             # failed 5 of 5 tests
-        not ok 2 - errors # time=22.734ms
+        not ok 2 - errors # time=22.861ms
         
         1..2
         # failed 2 of 2 tests
-    not ok 1 - assertions # time=59.227ms
+    not ok 1 - assertions # time=59.756ms
     
     1..1
     # failed 1 test
-    # time=64.115ms
+    # time=64.324ms
 }
 
 1..1
 # failed 1 test
-# time=265.945ms
+# time=271.235ms

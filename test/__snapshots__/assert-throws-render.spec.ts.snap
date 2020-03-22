@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`assert throws rendering handles not error 1`] = `
+"<bold><red>  <bold>● </><bold>assertions › errors › is not error</></>
+
+    The failure occurred here:
+
+    </> <gray> 10 | </></>
+    </> <gray> 11 | </>  await t<yellow>.</>test(<green>'errors'</><yellow>,</> async (t) <yellow>=></> {</>
+    </><red><bold>></></><gray> 12 | </>    t<yellow>.</>error(<cyan>new</> <yellow>Error</>(<green>'with message'</>)<yellow>,</> <green>'is not error'</>)<yellow>;</></>
+    </> <gray>    | </>      <red><bold>^</></></>
+    </> <gray> 13 | </></>
+    </> <gray> 14 | </>    t<yellow>.</>throws(() <yellow>=></> <green>'also good!'</><yellow>,</> <green>'is thrown'</>)<yellow>;</></>
+    </> <gray> 15 | </>    t<yellow>.</>doesNotThrow(() <yellow>=></> {</>
+
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:12:7)</>
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:11:11)</>
+
+    The error was:
+
+    </> <gray> 10 | </></>
+    </> <gray> 11 | </>  await t<yellow>.</>test(<green>'errors'</><yellow>,</> async (t) <yellow>=></> {</>
+    </><red><bold>></></><gray> 12 | </>    t<yellow>.</>error(<cyan>new</> <yellow>Error</>(<green>'with message'</>)<yellow>,</> <green>'is not error'</>)<yellow>;</></>
+    </> <gray>    | </>            <red><bold>^</></></>
+    </> <gray> 13 | </></>
+    </> <gray> 14 | </>    t<yellow>.</>throws(() <yellow>=></> <green>'also good!'</><yellow>,</> <green>'is thrown'</>)<yellow>;</></>
+    </> <gray> 15 | </>    t<yellow>.</>doesNotThrow(() <yellow>=></> {</>
+
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:12:13)</>
+    Additionally, <gray>tap</> said:
+
+    name: is not error
+    fullname: assertions.test.js assertions errors
+"
+`;
+
+exports[`assert throws rendering handles not thrown 1`] = `
+"<bold><red>  <bold>● </><bold>assertions › errors › is not thrown</></>
+
+    The failure occurred here:
+
+      <dim>at </>../../assertions.test.js<dim>:16:13</>
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:15:7)</>
+
+    Extra location information:
+
+    </> <gray> 14 | </>    t<yellow>.</>throws(() <yellow>=></> <green>'also good!'</><yellow>,</> <green>'is thrown'</>)<yellow>;</></>
+    </> <gray> 15 | </>    t<yellow>.</>doesNotThrow(() <yellow>=></> {</>
+    </><red><bold>></></><gray> 16 | </>      <cyan>throw</> <cyan>new</> <yellow>Error</>(<green>'oops!'</>)<yellow>;</></>
+    </> <gray>    | </>            <red><bold>^</></></>
+    </> <gray> 17 | </>    }<yellow>,</> <green>'is not thrown'</>)<yellow>;</></>
+    </> <gray> 18 | </></>
+    </> <gray> 19 | </>    await t<yellow>.</>resolves(async () <yellow>=></> {</>
+
+
+    Additionally, <gray>tap</> said:
+
+    name: is not thrown
+    diag:
+      message: oops!
+    fullname: assertions.test.js assertions errors
+"
+`;
+
+exports[`assert throws rendering handles rejected 1`] = `
+"<bold><red>  <bold>● </><bold>assertions › errors › is rejected</></>
+
+    Extra location information:
+
+    </> <gray> 20 | </>      <cyan>throw</> <cyan>new</> <yellow>Error</>(<green>'bam!'</>)<yellow>;</></>
+    </> <gray> 21 | </>    }<yellow>,</> <green>'is resolved'</>)<yellow>;</></>
+    </><red><bold>></></><gray> 22 | </>    await t<yellow>.</>rejects(async () <yellow>=></> <green>'all good!'</><yellow>,</> <green>'is rejected'</>)<yellow>;</></>
+    </> <gray>    | </>            <red><bold>^</></></>
+    </> <gray> 23 | </>  })<yellow>;</></>
+    </> <gray> 24 | </>})<yellow>;</></>
+    </> <gray> 25 | </></>
+
+
+    Additionally, <gray>tap</> said:
+
+    name: is rejected
+    diag:
+      found: all good!
+    fullname: assertions.test.js assertions errors
+"
+`;
+
+exports[`assert throws rendering handles resolved 1`] = `
+"<bold><red>  <bold>● </><bold>assertions › errors › is resolved</></>
+
+    Extra location information:
+
+    </> <gray> 17 | </>    }<yellow>,</> <green>'is not thrown'</>)<yellow>;</></>
+    </> <gray> 18 | </></>
+    </><red><bold>></></><gray> 19 | </>    await t<yellow>.</>resolves(async () <yellow>=></> {</>
+    </> <gray>    | </>            <red><bold>^</></></>
+    </> <gray> 20 | </>      <cyan>throw</> <cyan>new</> <yellow>Error</>(<green>'bam!'</>)<yellow>;</></>
+    </> <gray> 21 | </>    }<yellow>,</> <green>'is resolved'</>)<yellow>;</></>
+    </> <gray> 22 | </>    await t<yellow>.</>rejects(async () <yellow>=></> <green>'all good!'</><yellow>,</> <green>'is rejected'</>)<yellow>;</></>
+
+
+    Additionally, <gray>tap</> said:
+
+    name: is resolved
+    diag:
+      found: {}
+    fullname: assertions.test.js assertions errors
+"
+`;
+
+exports[`assert throws rendering handles thrown 1`] = `
+"<bold><red>  <bold>● </><bold>assertions › errors › is thrown</></>
+
+    The failure occurred here:
+
+    </> <gray> 12 | </>    t<yellow>.</>error(<cyan>new</> <yellow>Error</>(<green>'with message'</>)<yellow>,</> <green>'is not error'</>)<yellow>;</></>
+    </> <gray> 13 | </></>
+    </><red><bold>></></><gray> 14 | </>    t<yellow>.</>throws(() <yellow>=></> <green>'also good!'</><yellow>,</> <green>'is thrown'</>)<yellow>;</></>
+    </> <gray>    | </>      <red><bold>^</></></>
+    </> <gray> 15 | </>    t<yellow>.</>doesNotThrow(() <yellow>=></> {</>
+    </> <gray> 16 | </>      <cyan>throw</> <cyan>new</> <yellow>Error</>(<green>'oops!'</>)<yellow>;</></>
+    </> <gray> 17 | </>    }<yellow>,</> <green>'is not thrown'</>)<yellow>;</></>
+
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:14:7)</>
+      <dim>at Test.<anonymous> (</>assertions.test.js<dim>:11:11)</>
+
+
+    Additionally, <gray>tap</> said:
+
+    name: is thrown
+    fullname: assertions.test.js assertions errors
+"
+`;

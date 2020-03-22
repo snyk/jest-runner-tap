@@ -18,7 +18,7 @@ test('assertions', async (t) => {
 
     await t.resolves(async () => {
       throw new Error('bam!');
-    }, 'is rejected');
+    }, 'is resolved');
     await t.rejects(async () => 'all good!', 'is rejected');
   });
 });
