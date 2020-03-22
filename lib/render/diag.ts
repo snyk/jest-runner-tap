@@ -17,7 +17,7 @@ export function renderDiag(context: Context, origFailure: Result): string {
   delete failure.id;
   delete failure.ok;
 
-  if (!failure.diag || 0 === Object.entries(failure.diag).length) {
+  if (isEmpty(failure.diag)) {
     delete failure.diag;
   }
 
@@ -71,6 +71,6 @@ function indent(val: string): string {
   return val.replace(/^/gm, '    ');
 }
 
-function isEmpty(val: object): val is {} {
-  return 0 === Object.keys(val).length;
+function isEmpty(val: object | undefined): val is {} {
+  return !val || 0 === Object.keys(val).length;
 }
