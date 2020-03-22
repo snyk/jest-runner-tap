@@ -96,5 +96,14 @@ export function pushProcessFailure(
     status: 'failed',
   });
   result.numFailingTests += 1;
-  result.failureMessage += `\n... and the test *file* failed: ${code} ${sig}`;
+  result.failureMessage += `\n    ... and ${chalk.red(`the test ${chalk.bold('file')} failed`)} `;
+  if (code) {
+    result.failureMessage += `with an exit code, ${chalk.red(code)}`;
+  }
+
+  if (sig) {
+    result.failureMessage += `with a signal, ${chalk.red(sig)}`;
+  }
+
+  result.failureMessage += '\n';
 }

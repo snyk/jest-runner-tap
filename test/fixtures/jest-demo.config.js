@@ -5,7 +5,7 @@ module.exports = {
       testMatch: ['<rootDir>/**/*.test.js'],
       globals: {
         'jest-runner-tap': {
-          tapCommand: ['../../node_modules/.bin/tap', '-R', 'tap'],
+          tapCommand: ['../../node_modules/.bin/tap', '-R', 'tap', '--timeout', '1'],
         }
       }
     }
