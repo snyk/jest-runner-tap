@@ -12,8 +12,8 @@ exports[`error rendering handles exceptions 1`] = `
     </> <gray> 15 | </>}</>
     </> <gray> 16 | </></>
 
-      <dim>at buggy (</>type-error.js<dim>:14:3)</>
-      <dim>at Test.<anonymous> (</>type-error.js<dim>:5:3)</>
+      <dim>at buggy (</>type-error.test.js<dim>:14:3)</>
+      <dim>at Test.<anonymous> (</>type-error.test.js<dim>:5:3)</>
 
 "
 `;

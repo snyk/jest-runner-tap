@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`assert rendering handles equal 1`] = `
+"  ✕  is equal
+
+    We failed to fully process the tap output:
+    name: is equal
+    diag:
+      found: false
+      wanted: true
+      compare: ===
+      at:
+        line: 7
+        column: 7
+        file: assertions.test.js
+        type: Test
+      stack: |
+        Test.<anonymous> (assertions.test.js:7:7)
+        Test.<anonymous> (assertions.test.js:4:11)
+        Object.<anonymous> (assertions.test.js:3:1)
+      source: |2
+            t.notOk(true, 'is notOk');
+            t.equal(false, true, 'is equal');
+        ------^
+            t.same(false, true, 'is same');
+          });
+    fullname: assertions.test.js assertions equality
+"
+`;
+
+exports[`assert rendering handles notOk 1`] = `
+"  ✕  is notOk
+
+    We failed to fully process the tap output:
+    name: is notOk
+    diag:
+      at:
+        line: 6
+        column: 7
+        file: assertions.test.js
+        type: Test
+      stack: |
+        Test.<anonymous> (assertions.test.js:6:7)
+        Test.<anonymous> (assertions.test.js:4:11)
+        Object.<anonymous> (assertions.test.js:3:1)
+      source: |2
+            t.ok(false, 'is ok');
+            t.notOk(true, 'is notOk');
+        ------^
+            t.equal(false, true, 'is equal');
+            t.same(false, true, 'is same');
+    fullname: assertions.test.js assertions equality
+"
+`;
+
+exports[`assert rendering handles ok 1`] = `
+"  ✕  is ok
+
+    We failed to fully process the tap output:
+    name: is ok
+    diag:
+      at:
+        line: 5
+        column: 7
+        file: assertions.test.js
+        type: Test
+      stack: |
+        Test.<anonymous> (assertions.test.js:5:7)
+        Test.<anonymous> (assertions.test.js:4:11)
+        Object.<anonymous> (assertions.test.js:3:1)
+      source: |2
+          await t.test('equality', async (t) => {
+            t.ok(false, 'is ok');
+        ------^
+            t.notOk(true, 'is notOk');
+            t.equal(false, true, 'is equal');
+    fullname: assertions.test.js assertions equality
+"
+`;
+
+exports[`assert rendering handles same 1`] = `
+"  ✕  is same
+
+    We failed to fully process the tap output:
+    name: is same
+    diag:
+      diff: |
+        --- expected
+        +++ actual
+        @@ -1,1 +1,1 @@
+        -true
+        +false
+      at:
+        line: 8
+        column: 7
+        file: assertions.test.js
+        type: Test
+      stack: |
+        Test.<anonymous> (assertions.test.js:8:7)
+        Test.<anonymous> (assertions.test.js:4:11)
+        Object.<anonymous> (assertions.test.js:3:1)
+      source: |2
+            t.equal(false, true, 'is equal');
+            t.same(false, true, 'is same');
+        ------^
+          });
+    fullname: assertions.test.js assertions equality
+"
+`;

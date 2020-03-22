@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import type { AssertionResult } from '@jest/test-result';
+import type { AssertionResult, TestResult } from '@jest/test-result';
 import { makeParser, translateResult } from '../lib/tree';
 
 describe('translation', () => {
@@ -102,7 +102,7 @@ describe('translation', () => {
   });
 });
 
-export async function testTranslation(tapFile: string) {
+export async function testTranslation(tapFile: string): Promise<TestResult> {
   const [parser, output] = makeParser();
   await new Promise((resolve, reject) => {
     const fullPath = require.resolve(tapFile);

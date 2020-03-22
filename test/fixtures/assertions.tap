@@ -1,0 +1,256 @@
+TAP version 13
+not ok 1 - assertions.test.js # time=64.115ms
+  ---
+  env: {}
+  file: assertions.test.js
+  timeout: 1000
+  command: /usr/bin/node
+  args:
+    - -r
+    - /home/faux/code/jest-runner-tap/node_modules/esm/esm.js
+    - assertions.test.js
+  stdio:
+    - 0
+    - pipe
+    - 2
+  cwd: /home/faux/code/jest-runner-tap/test/fixtures
+  exitCode: 1
+  ...
+{
+    # Subtest: assertions
+        # Subtest: equality
+            not ok 1 - is ok
+              ---
+              at:
+                line: 5
+                column: 7
+                file: assertions.test.js
+                type: Test
+              stack: |
+                Test.<anonymous> (assertions.test.js:5:7)
+                Test.<anonymous> (assertions.test.js:4:11)
+                Object.<anonymous> (assertions.test.js:3:1)
+              source: |2
+                  await t.test('equality', async (t) => {
+                    t.ok(false, 'is ok');
+                ------^
+                    t.notOk(true, 'is notOk');
+                    t.equal(false, true, 'is equal');
+              ...
+            
+            not ok 2 - is notOk
+              ---
+              at:
+                line: 6
+                column: 7
+                file: assertions.test.js
+                type: Test
+              stack: |
+                Test.<anonymous> (assertions.test.js:6:7)
+                Test.<anonymous> (assertions.test.js:4:11)
+                Object.<anonymous> (assertions.test.js:3:1)
+              source: |2
+                    t.ok(false, 'is ok');
+                    t.notOk(true, 'is notOk');
+                ------^
+                    t.equal(false, true, 'is equal');
+                    t.same(false, true, 'is same');
+              ...
+            
+            not ok 3 - is equal
+              ---
+              found: false
+              wanted: true
+              compare: ===
+              at:
+                line: 7
+                column: 7
+                file: assertions.test.js
+                type: Test
+              stack: |
+                Test.<anonymous> (assertions.test.js:7:7)
+                Test.<anonymous> (assertions.test.js:4:11)
+                Object.<anonymous> (assertions.test.js:3:1)
+              source: |2
+                    t.notOk(true, 'is notOk');
+                    t.equal(false, true, 'is equal');
+                ------^
+                    t.same(false, true, 'is same');
+                  });
+              ...
+            
+            not ok 4 - is same
+              ---
+              diff: |
+                --- expected
+                +++ actual
+                @@ -1,1 +1,1 @@
+                -true
+                +false
+              at:
+                line: 8
+                column: 7
+                file: assertions.test.js
+                type: Test
+              stack: |
+                Test.<anonymous> (assertions.test.js:8:7)
+                Test.<anonymous> (assertions.test.js:4:11)
+                Object.<anonymous> (assertions.test.js:3:1)
+              source: |2
+                    t.equal(false, true, 'is equal');
+                    t.same(false, true, 'is same');
+                ------^
+                  });
+              ...
+            
+            1..4
+            # failed 4 of 4 tests
+        not ok 1 - equality # time=30.844ms
+        
+        # Subtest: errors
+            not ok 1 - is not error
+              ---
+              origin:
+                at:
+                  line: 12
+                  column: 13
+                  file: assertions.test.js
+                  function: Test.<anonymous>
+                stack: |
+                  Test.<anonymous> (assertions.test.js:12:13)
+                source: |2
+                    await t.test('errors', async (t) => {
+                      t.error(new Error('with message'), 'is not error');
+                  ------------^
+              
+                      t.throws(() => 'also good!', 'is thrown');
+              found:
+                !error
+                name: Error
+                message: with message
+                stack: >-
+                  Error: 
+                      at Test.<anonymous> (/home/faux/code/jest-runner-tap/test/fixtures/assertions.test.js:12:13)
+                      at TapWrap.runInAsyncScope (async_hooks.js:179:9)
+                      at Test.cb (/home/faux/code/jest-runner-tap/node_modules/tap/lib/test.js:145:40)
+                      at /home/faux/code/jest-runner-tap/node_modules/tap/lib/test.js:383:21
+                      at Test.main (/home/faux/code/jest-runner-tap/node_modules/tap/lib/test.js:390:7)
+                      at TapWrap.runInAsyncScope (async_hooks.js:179:9)
+                      at Test.runMain (/home/faux/code/jest-runner-tap/node_modules/tap/lib/base.js:193:15)
+                      at /home/faux/code/jest-runner-tap/node_modules/tap/lib/test.js:499:13
+                      at Test.writeSubComment (/home/faux/code/jest-runner-tap/node_modules/tap/lib/test.js:558:5)
+                      at Test.<anonymous> (/home/faux/code/jest-runner-tap/node_modules/tap/lib/test.js:498:14)
+              at:
+                line: 12
+                column: 7
+                file: assertions.test.js
+                type: Test
+              stack: |
+                Test.<anonymous> (assertions.test.js:12:7)
+                Test.<anonymous> (assertions.test.js:11:11)
+              source: |2
+                  await t.test('errors', async (t) => {
+                    t.error(new Error('with message'), 'is not error');
+                ------^
+              
+                    t.throws(() => 'also good!', 'is thrown');
+              ...
+            
+            not ok 2 - is thrown
+              ---
+              at:
+                line: 14
+                column: 7
+                file: assertions.test.js
+                type: Test
+              stack: |
+                Test.<anonymous> (assertions.test.js:14:7)
+                Test.<anonymous> (assertions.test.js:11:11)
+              source: |2
+              
+                    t.throws(() => 'also good!', 'is thrown');
+                ------^
+                    t.doesNotThrow(() => {
+                      throw new Error('oops!');
+              ...
+            
+            not ok 3 - is not thrown
+              ---
+              at:
+                line: 16
+                column: 13
+                file: assertions.test.js
+              stack: |
+                assertions.test.js:16:13
+                Test.<anonymous> (assertions.test.js:15:7)
+              message: oops!
+              source: |2
+                    t.doesNotThrow(() => {
+                      throw new Error('oops!');
+                ------------^
+                    }, 'is not thrown');
+              ...
+            
+            not ok 4 - is rejected
+              ---
+              at:
+                line: 19
+                column: 13
+                file: assertions.test.js
+                type: Test
+              found:
+                !error
+                name: Error
+                message: bam!
+                stack: >-
+                  Error: bam!
+                      at /home/faux/code/jest-runner-tap/test/fixtures/assertions.test.js:20:13
+                      at Test.resolves (/home/faux/code/jest-runner-tap/node_modules/tap/lib/test.js:1677:17)
+                      at Test.<anonymous> (/home/faux/code/jest-runner-tap/test/fixtures/assertions.test.js:19:13)
+                      at TapWrap.runInAsyncScope (async_hooks.js:179:9)
+                      at Test.cb (/home/faux/code/jest-runner-tap/node_modules/tap/lib/test.js:145:40)
+                      at /home/faux/code/jest-runner-tap/node_modules/tap/lib/test.js:383:21
+                      at Test.main (/home/faux/code/jest-runner-tap/node_modules/tap/lib/test.js:390:7)
+                      at TapWrap.runInAsyncScope (async_hooks.js:179:9)
+                      at Test.runMain (/home/faux/code/jest-runner-tap/node_modules/tap/lib/base.js:193:15)
+                      at /home/faux/code/jest-runner-tap/node_modules/tap/lib/test.js:499:13
+              source: |2
+              
+                    await t.resolves(async () => {
+                ------------^
+                      throw new Error('bam!');
+                    }, 'is rejected');
+              ...
+            
+            not ok 5 - is rejected
+              ---
+              at:
+                line: 22
+                column: 13
+                file: assertions.test.js
+                type: Test
+              found: all good!
+              source: |2
+                    }, 'is rejected');
+                    await t.rejects(async () => 'all good!', 'is rejected');
+                ------------^
+                  });
+                });
+              ...
+            
+            1..5
+            # failed 5 of 5 tests
+        not ok 2 - errors # time=22.734ms
+        
+        1..2
+        # failed 2 of 2 tests
+    not ok 1 - assertions # time=59.227ms
+    
+    1..1
+    # failed 1 test
+    # time=64.115ms
+}
+
+1..1
+# failed 1 test
+# time=265.945ms

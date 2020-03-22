@@ -18,7 +18,7 @@ export function translateResult(
   context: Context,
   builder: BuildTree,
   [code, sig]: [number | null, string | null],
-) {
+): TestResult {
   const result = defaultTestResult(context.testPath);
 
   try {

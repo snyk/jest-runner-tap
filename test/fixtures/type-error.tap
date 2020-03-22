@@ -1,14 +1,14 @@
 TAP version 13
-not ok 1 - type-error.js # time=23.511ms
+not ok 1 - type-error.test.js # time=19.116ms
   ---
   env: {}
-  file: type-error.js
+  file: type-error.test.js
   timeout: 1000
   command: /usr/bin/node
   args:
     - -r
     - /home/faux/code/jest-runner-tap/node_modules/esm/esm.js
-    - type-error.js
+    - type-error.test.js
   stdio:
     - 0
     - pipe
@@ -22,12 +22,12 @@ not ok 1 - type-error.js # time=23.511ms
         not ok 2 - value is not a function
           ---
           stack: |
-            buggy (type-error.js:14:3)
-            Test.<anonymous> (type-error.js:5:3)
+            buggy (type-error.test.js:14:3)
+            Test.<anonymous> (type-error.test.js:5:3)
           at:
             line: 14
             column: 3
-            file: type-error.js
+            file: type-error.test.js
             function: buggy
           type: TypeError
           tapCaught: returnedPromiseRejection
@@ -41,18 +41,18 @@ not ok 1 - type-error.js # time=23.511ms
         
         1..2
         # failed 1 of 2 tests
-    not ok 1 - gonna throw # time=16.745ms
+    not ok 1 - gonna throw # time=13.275ms
     
     # Subtest: not gonna throw
         ok 1 - inside
         1..1
-    ok 2 - not gonna throw # time=0.709ms
+    ok 2 - not gonna throw # time=0.51ms
     
     1..2
     # failed 1 of 2 tests
-    # time=23.511ms
+    # time=19.116ms
 }
 
 1..1
 # failed 1 test
-# time=211.983ms
+# time=207.324ms
