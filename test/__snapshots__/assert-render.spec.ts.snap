@@ -39,6 +39,12 @@ exports[`assert rendering handles notOk 1`] = `
       <dim>at Test.<anonymous> (</>assertions.test.js<dim>:6:7)</>
       <dim>at Test.<anonymous> (</>assertions.test.js<dim>:4:11)</>
       <dim>at Object.<anonymous> (</>assertions.test.js<dim>:3:1)</>
+
+
+    Additionally, <gray>tap</> said:
+
+    name: is notOk
+    fullname: assertions.test.js assertions equality
 "
 `;
 
@@ -58,6 +64,12 @@ exports[`assert rendering handles ok 1`] = `
       <dim>at Test.<anonymous> (</>assertions.test.js<dim>:5:7)</>
       <dim>at Test.<anonymous> (</>assertions.test.js<dim>:4:11)</>
       <dim>at Object.<anonymous> (</>assertions.test.js<dim>:3:1)</>
+
+
+    Additionally, <gray>tap</> said:
+
+    name: is ok
+    fullname: assertions.test.js assertions equality
 "
 `;
 

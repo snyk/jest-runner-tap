@@ -9,24 +9,6 @@ import chalk = require('chalk');
 import { Context } from '../context';
 import * as yaml from 'yaml';
 
-function renderLocation(diag: any, msg: string) {
-  if ('found' in diag && 'wanted' in diag && 'compare' in diag) {
-    const diff = printDiffOrStringify(
-      diag.wanted,
-      diag.found,
-      '  found',
-      ' wanted',
-      true,
-    );
-    msg += indent(`${diff}\ncompare: ${diag.compare}\n\n`);
-
-    delete diag.found;
-    delete diag.wanted;
-    delete diag.compare;
-  }
-  return msg;
-}
-
 export function renderDiag(context: Context, origFailure: Result): string {
   const failure = cloneDeep(origFailure);
 
@@ -37,11 +19,31 @@ export function renderDiag(context: Context, origFailure: Result): string {
     delete failure.diag.tapCaught;
   } else if (failure?.diag) {
     const diag: any = failure?.diag;
-    msg = renderLocation(diag, msg);
+
+    if ('found' in diag && 'wanted' in diag && 'compare' in diag) {
+      const diff = printDiffOrStringify(
+        diag.wanted,
+        diag.found,
+        '  found',
+        ' wanted',
+        true,
+      );
+      msg += indent(`${diff}\ncompare: ${diag.compare}\n\n`);
+
+      delete diag.found;
+      delete diag.wanted;
+      delete diag.compare;
+
+      delete failure.name;
+      delete failure.fullname;
+    }
 
     if ('diff' in diag) {
       msg += indent(highlightDiff(diag.diff), '         ');
       delete diag.diff;
+
+      delete failure.name;
+      delete failure.fullname;
     }
 
     if (diag.stack) {
@@ -86,11 +88,6 @@ export function renderDiag(context: Context, origFailure: Result): string {
 
   delete failure.id;
   delete failure.ok;
-
-  if (msg) {
-    delete failure.name;
-    delete failure.fullname;
-  }
 
   if (isEmpty(failure.diag)) {
     delete failure.diag;
