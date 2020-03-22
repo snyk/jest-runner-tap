@@ -69,6 +69,7 @@ export class BuildTree {
           ok: false,
           // who knows; the child's name is better (populated) for timeout
           name: `${this.currentChild.guessedName} (synthetic; test exploded)`,
+          diag: undefined,
         },
         children: [...this.currentChild.finished()],
       });
