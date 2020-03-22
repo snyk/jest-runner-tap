@@ -4,7 +4,7 @@
   "description": "Jest runner which executes tap, and parses the result",
   "main": "dist/index.js",
   "repository": "https://github.com/FauxFaux/jest-runner-tap",
-  "license": "ISC",
+  "license": "MIT OR Apache-2.0",
   "scripts": {
     "format": "prettier --write '{lib,test}/**/*.ts'",
     "prepare": "npm run build",
