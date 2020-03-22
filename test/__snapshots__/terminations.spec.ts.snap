@@ -4,6 +4,12 @@ exports[`translation of terminations handles a test which timed out 1`] = `
 "
   ✕  bravo
 
-    Timeout! SIGTERM triggered by TAP during bravo
+    We failed to fully process the tap output:
+    name: timeout!
+    diag:
+      signal: SIGTERM
+      expired: TAP
+      test: bravo
+    fullname: timeout.js bravo
 "
 `;

@@ -24,10 +24,11 @@ export function pushTestResults(
   for (const failure of notOkay) {
     let msg = '';
     msg += `  ✕  ${failure.diag?.test || failure.name}\n\n`;
-    msg += renderDiag(context, failure);
+    msg += renderDiag(context, failure).trimRight();
+    msg += '\n';
     failureMessages.push(msg);
   }
-  result.failureMessage += failureMessages.join('\n') + '\n';
+  result.failureMessage += failureMessages.join('\n').trimRight() + '\n';
   const root = 0 === path.length;
   result.testResults.push({
     title: root ? '⊥' : path[path.length - 1],

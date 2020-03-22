@@ -52,6 +52,7 @@ declare module 'tap-parser' {
       id: number;
       time?: number;
       name: string;
+      fullname?: string;
       diag: D;
     }
   }
