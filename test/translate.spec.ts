@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import type { AssertionResult } from '@jest/test-result';
-import { makeParser, translateResult } from '../lib/translator';
+import { makeParser, translateResult } from '../lib/tree';
 
 describe('translation', () => {
   it('handles a test with one assert', async () => {

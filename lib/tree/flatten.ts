@@ -1,7 +1,7 @@
 import type { SerializableError, TestResult } from '@jest/test-result';
 import type { Result } from 'tap-parser';
 import type { BuildTree, ChildNode } from './builder';
-import { pushExceptionFailure, pushTestResults } from '../translator/render';
+import { pushExceptionFailure, pushTestResults } from '../render';
 import { Context } from '../context';
 
 export function flatten(

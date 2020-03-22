@@ -1,8 +1,8 @@
 import { createEmptyTestResult, TestResult } from '@jest/test-result';
 import TapParser = require('tap-parser');
-import { pushExceptionFailure, pushProcessFailure } from './render';
-import { flatten } from '../tree/flatten';
-import { BuildTree } from '../tree/builder';
+import { pushExceptionFailure, pushProcessFailure } from '../render';
+import { flatten } from './flatten';
+import { BuildTree } from './builder';
 import { Context } from '../context';
 
 // it is up to the caller to make sure the returned array is only read after the parser is complete

@@ -2,7 +2,7 @@ import { inspect } from 'util';
 import type { SerializableError, TestResult } from '@jest/test-result';
 import type { ExceptionDiag, Result, TimeoutDiag } from 'tap-parser';
 import { formatStackTrace } from 'jest-message-util';
-import { Context } from '../context';
+import type { Context } from '../context';
 
 export function pushTestResults(
   context: Context,

@@ -3,7 +3,7 @@ import { Config } from '@jest/types';
 import { JestEnvironment } from '@jest/environment';
 import Runtime from 'jest-runtime';
 import { TestResult } from '@jest/test-result';
-import { translateResult, makeParser } from './translator';
+import { translateResult, makeParser } from './tree';
 import { loadConfig } from './config';
 
 export async function bySpawn(
