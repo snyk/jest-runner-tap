@@ -1,6 +1,6 @@
 import TapParser = require('tap-parser');
 import type { Result } from 'tap-parser';
-import {inspect} from "util";
+import { inspect } from 'util';
 
 export interface ChildNode {
   kind: 'child';

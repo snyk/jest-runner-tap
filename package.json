@@ -36,7 +36,7 @@
     "jest": "^25.1.0",
     "jest-circus": "^25.1.0",
     "jest-runtime": "^25.1.0",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.1",
     "sleep-promise": "^8.0.1",
     "tap": "^14.10.6",
     "tap-mocha-reporter": "^5.0.1",

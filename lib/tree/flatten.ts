@@ -4,18 +4,32 @@ import type { BuildTree, ChildNode } from './builder';
 import { pushExceptionFailure, pushTestResults } from '../translator/render';
 import { Context } from '../context';
 
-export function flatten(context: Context, result: TestResult, builder: BuildTree): void {
+export function flatten(
+  context: Context,
+  result: TestResult,
+  builder: BuildTree,
+): void {
   const events = builder.finished();
   const first = events[0];
   if (first?.kind === 'child') {
     handle(context, result, first, []);
   }
   if (events.length > 1) {
-    pushExceptionFailure(context, result, new Error('invalid root array length') as SerializableError, 'events.length');
+    pushExceptionFailure(
+      context,
+      result,
+      new Error('invalid root array length') as SerializableError,
+      'events.length',
+    );
   }
 }
 
-function handle(context: Context, result: TestResult, node: ChildNode, path: string[]): void {
+function handle(
+  context: Context,
+  result: TestResult,
+  node: ChildNode,
+  path: string[],
+): void {
   const events = node.children;
 
   const asserts: Result[] = [];

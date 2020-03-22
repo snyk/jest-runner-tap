@@ -1,13 +1,16 @@
 import { inspect } from 'util';
-import type {
-  SerializableError,
-  TestResult,
-} from '@jest/test-result';
+import type { SerializableError, TestResult } from '@jest/test-result';
 import type { ExceptionDiag, Result, TimeoutDiag } from 'tap-parser';
 import { formatStackTrace } from 'jest-message-util';
 import { Context } from '../context';
 
-export function pushTestResults(context: Context, result: TestResult, results: Result[], path: string[], time: number | undefined) {
+export function pushTestResults(
+  context: Context,
+  result: TestResult,
+  results: Result[],
+  path: string[],
+  time: number | undefined,
+) {
   const passing = results.filter((r) => r.ok);
   const notOkay = results.filter((r) => !r.ok);
   const passed = notOkay.length === 0;
@@ -48,10 +51,7 @@ function renderDiag(context: Context, failure: Result) {
     return renderTimeout(context, failure as Result<TimeoutDiag>);
   }
 
-  return inspect(failure, {depth: 3, colors: true}).replace(
-    /^/gm,
-    '     ',
-  );
+  return inspect(failure, { depth: 3, colors: true }).replace(/^/gm, '     ');
 }
 
 function renderException(context: Context, failure: Result<ExceptionDiag>) {
@@ -59,9 +59,13 @@ function renderException(context: Context, failure: Result<ExceptionDiag>) {
   const ruined = failure.diag.stack
     .trimRight()
     .replace(/\((?!\/)/g, `(${context.globalConfig.rootDir}/`)
-    .replace(/^/mg, ' at ');
+    .replace(/^/gm, ' at ');
 
-  const stackAndMaybeCode = formatStackTrace(ruined, context.projectConfig, context.globalConfig);
+  const stackAndMaybeCode = formatStackTrace(
+    ruined,
+    context.projectConfig,
+    context.globalConfig,
+  );
   return `    ${failure.diag.type}: ${failure.name}\n${stackAndMaybeCode}`;
 }
 

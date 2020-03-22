@@ -71,7 +71,7 @@ describe('translation', () => {
         failureMessages: [],
         ancestorTitles: [],
       } as Partial<AssertionResult>),
-     expect.objectContaining({
+      expect.objectContaining({
         title: '⊥',
         status: 'passed',
         numPassingAsserts: 2,
@@ -104,23 +104,27 @@ describe('translation', () => {
 
 export async function testTranslation(tapFile: string) {
   const [parser, output] = makeParser();
-  await new Promise(((resolve, reject) => {
+  await new Promise((resolve, reject) => {
     const fullPath = require.resolve(tapFile);
     const stream = fs.createReadStream(fullPath);
     stream.on('error', reject);
     stream.on('end', resolve);
     stream.pipe(parser);
-  }));
+  });
 
   const rootDir = path.join(__dirname, 'fixtures');
-  return translateResult({
-    testPath: tapFile.replace('\.tap', '.js'),
-    globalConfig: {
-      rootDir,
-    } as any,
-    projectConfig: {
-      rootDir,
-    } as any,
-    maskErrors: false,
-  }, output, [0, null]);
+  return translateResult(
+    {
+      testPath: tapFile.replace('.tap', '.js'),
+      globalConfig: {
+        rootDir,
+      } as any,
+      projectConfig: {
+        rootDir,
+      } as any,
+      maskErrors: false,
+    },
+    output,
+    [0, null],
+  );
 }

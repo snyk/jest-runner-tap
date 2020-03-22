@@ -1,17 +1,23 @@
 import type { Config } from '@jest/types';
-import * as path from "path";
+import * as path from 'path';
 import { replaceRootDirInPath } from 'jest-config';
 
 export interface TapBridgeConfig {
-  tapCommand: string[],
+  tapCommand: string[];
 }
 
-export async function loadConfig(project: Config.ProjectConfig): Promise<TapBridgeConfig> {
+export async function loadConfig(
+  project: Config.ProjectConfig,
+): Promise<TapBridgeConfig> {
   const proj: Record<string, any> = project.globals['jest-runner-tap'] || {};
 
   // take the defaults
   const config: TapBridgeConfig = {
-    tapCommand: [ path.join(project.rootDir, 'node_modules/.bin/tap'), '-R', 'tap' ],
+    tapCommand: [
+      path.join(project.rootDir, 'node_modules/.bin/tap'),
+      '-R',
+      'tap',
+    ],
   };
 
   if (proj.tapCommand) {
@@ -22,5 +28,5 @@ export async function loadConfig(project: Config.ProjectConfig): Promise<TapBrid
 }
 
 function replaceRootDirInParts(rootDir: string, parts: string[]): string[] {
-  return parts.map((p: string) => replaceRootDirInPath(rootDir, p))
+  return parts.map((p: string) => replaceRootDirInPath(rootDir, p));
 }
