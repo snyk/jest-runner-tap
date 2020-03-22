@@ -1,5 +1,5 @@
-import { testTranslation } from './translate.spec';
 import { TestResult } from '@jest/test-result';
+import { testTranslation, findAssert } from './sniff';
 
 describe('assert rendering', () => {
   let result: TestResult;
@@ -7,30 +7,19 @@ describe('assert rendering', () => {
     result = await testTranslation('./fixtures/assertions.tap');
   });
 
-  function findAssert(name: string) {
-    for (const test of result.testResults) {
-      for (const message of test.failureMessages) {
-        if (message.split('\n')[0].trim().includes(name)) {
-          return message;
-        }
-      }
-    }
-    throw new Error('no test result found');
-  }
-
   it('handles ok', async () => {
-    expect(findAssert('is ok')).toMatchSnapshot();
+    expect(findAssert(result, 'is ok')).toMatchSnapshot();
   });
 
   it('handles notOk', async () => {
-    expect(findAssert('is notOk')).toMatchSnapshot();
+    expect(findAssert(result, 'is notOk')).toMatchSnapshot();
   });
 
   it('handles equal', async () => {
-    expect(findAssert('is equal')).toMatchSnapshot();
+    expect(findAssert(result, 'is equal')).toMatchSnapshot();
   });
 
   it('handles same', async () => {
-    expect(findAssert('is same')).toMatchSnapshot();
+    expect(findAssert(result, 'is same')).toMatchSnapshot();
   });
 });

@@ -1,7 +1,5 @@
-import * as path from 'path';
-import * as fs from 'fs-extra';
-import type { AssertionResult, TestResult } from '@jest/test-result';
-import { makeParser, translateResult } from '../lib/tree';
+import type { AssertionResult } from '@jest/test-result';
+import { testTranslation } from './sniff';
 
 describe('translation', () => {
   it('handles a test with one assert', async () => {
@@ -101,30 +99,3 @@ describe('translation', () => {
     expect(result.testResults[0].duration).toBeGreaterThan(0);
   });
 });
-
-export async function testTranslation(tapFile: string): Promise<TestResult> {
-  const [parser, output] = makeParser();
-  await new Promise((resolve, reject) => {
-    const fullPath = require.resolve(tapFile);
-    const stream = fs.createReadStream(fullPath);
-    stream.on('error', reject);
-    stream.on('end', resolve);
-    stream.pipe(parser);
-  });
-
-  const rootDir = path.join(__dirname, 'fixtures');
-  return translateResult(
-    {
-      testPath: tapFile.replace('.tap', '.js'),
-      globalConfig: {
-        rootDir,
-      } as any,
-      projectConfig: {
-        rootDir,
-      } as any,
-      maskErrors: false,
-    },
-    output,
-    [0, null],
-  );
-}

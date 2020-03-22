@@ -1,4 +1,4 @@
-import { testTranslation } from './translate.spec';
+import { testTranslation } from './sniff';
 
 describe('error rendering', () => {
   it('handles exceptions', async () => {

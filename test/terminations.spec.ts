@@ -1,5 +1,5 @@
 import type { AssertionResult } from '@jest/test-result';
-import { testTranslation } from './translate.spec';
+import { testTranslation } from './sniff';
 
 describe('translation of terminations', () => {
   it('handles a test which timed out', async () => {
