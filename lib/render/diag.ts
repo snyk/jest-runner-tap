@@ -1,14 +1,23 @@
+import * as fs from 'fs';
+import * as path from 'path';
 import cloneDeep = require('lodash.clonedeep');
 import type { ExceptionDiag, Result } from 'tap-parser';
 import { formatStackTrace } from 'jest-message-util';
 import { printDiffOrStringify } from 'jest-matcher-utils';
+import { codeFrameColumns } from '@babel/code-frame';
 import chalk = require('chalk');
 import { Context } from '../context';
 import * as yaml from 'yaml';
 
 function renderLocation(diag: any, msg: string) {
   if ('found' in diag && 'wanted' in diag && 'compare' in diag) {
-    const diff = printDiffOrStringify(diag.wanted, diag.found, '  found', ' wanted', true);
+    const diff = printDiffOrStringify(
+      diag.wanted,
+      diag.found,
+      '  found',
+      ' wanted',
+      true,
+    );
     msg += indent(`${diff}\ncompare: ${diag.compare}\n\n`);
 
     delete diag.found;
@@ -60,6 +69,19 @@ export function renderDiag(context: Context, origFailure: Result): string {
         delete diag.found;
       }
     }
+
+    if (diag.at) {
+      try {
+        msg += indent(
+          `Extra location information:\n\n${renderAtWithoutStack(
+            context,
+            diag,
+          )}\n\n`,
+        );
+      } catch (e) {
+        // just leave the `at` as is
+      }
+    }
   }
 
   delete failure.id;
@@ -96,11 +118,22 @@ function repairStackTrace(context: Context, stack: string) {
     .replace(/\((?!\/)/g, `(${context.globalConfig.rootDir}/`)
     .replace(/^/gm, ' at ');
 
-  return formatStackTrace(
-    ruined,
-    context.projectConfig,
-    context.globalConfig,
+  return formatStackTrace(ruined, context.projectConfig, context.globalConfig);
+}
+
+function renderAtWithoutStack(context: Context, diag: any): string {
+  const file = path.join(context.globalConfig.rootDir, diag.at.file);
+
+  const msg = codeFrameColumns(
+    fs.readFileSync(file).toString('utf-8'),
+    { start: diag.at },
+    { highlightCode: true },
   );
+
+  delete diag.at;
+  delete diag.source;
+
+  return msg;
 }
 
 function maybeDeleteStackInfo(rendered: string, diag: any) {
