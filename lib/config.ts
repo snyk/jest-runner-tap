@@ -9,7 +9,8 @@ export interface TapBridgeConfig {
 export async function loadConfig(
   project: Config.ProjectConfig,
 ): Promise<TapBridgeConfig> {
-  const proj: Record<string, any> = project.globals['jest-runner-tap'] || {};
+  const configBlock = project.globals['jest-runner-tap'] || {};
+  const proj = configBlock as Record<string, any>;
 
   // take the defaults
   const config: TapBridgeConfig = {

@@ -8,7 +8,7 @@ Run `tap`, and render the output for `jest`.
 You can run `tap` and `jest` tests in parallel from the same
 unified interface, and get the performance benefits, (e.g.
 `jest` knowing which tests to run first), and the reporting
-benefits (i.e. use anything that supports jest).
+benefits (i.e. use anything that supports `jest`).
 
 
 #### How?
