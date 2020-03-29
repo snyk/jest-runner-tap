@@ -10,7 +10,7 @@ export async function loadConfig(
   project: Config.ProjectConfig,
 ): Promise<TapBridgeConfig> {
   const configBlock = project.globals['jest-runner-tap'] || {};
-  const proj = configBlock as Record<string, any>;
+  const proj = configBlock as Record<string, unknown>;
 
   // take the defaults
   const config: TapBridgeConfig = {
@@ -22,6 +22,11 @@ export async function loadConfig(
   };
 
   if (proj.tapCommand) {
+    if (!Array.isArray(proj.tapCommand)) {
+      throw new Error(
+        'tap command must be an array, not ' + JSON.stringify(proj.tapCommand),
+      );
+    }
     config.tapCommand = replaceRootDirInParts(project.rootDir, proj.tapCommand);
   }
 

@@ -13,7 +13,7 @@ export async function bySpawn(
   runtime: Runtime,
   testPath: string,
 ): Promise<TestResult> {
-  let config = await loadConfig(projectConfig);
+  const config = await loadConfig(projectConfig);
 
   const context = {
     testPath,

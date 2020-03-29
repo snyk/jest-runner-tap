@@ -13,7 +13,7 @@ export function pushTestResults(
   results: Result[],
   path: string[],
   time: number | undefined,
-) {
+): void {
   const passing = results.filter((r) => r.ok);
   const notOkay = results.filter((r) => !r.ok);
   const passed = notOkay.length === 0;
@@ -63,7 +63,7 @@ export function pushExceptionFailure(
   result: TestResult,
   err: SerializableError,
   msg: string,
-) {
+): void {
   result.testResults.push({
     title: `${msg} success`,
     fullName: `could ${msg} successfully`,
@@ -86,7 +86,7 @@ export function pushProcessFailure(
   testPath: string,
   code: number | null,
   sig: string | null,
-) {
+): void {
   result.testResults.push({
     title: 'process success',
     fullName: `${testPath} exited successfully`,

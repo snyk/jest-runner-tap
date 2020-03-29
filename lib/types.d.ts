@@ -1,6 +1,7 @@
 declare module 'tap-parser' {
   import { Result } from 'tap-parser';
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface TapParser extends NodeJS.WritableStream {}
 
   class TapParser {

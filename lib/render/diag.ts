@@ -12,7 +12,7 @@ import * as yaml from 'yaml';
 export function renderDiag(context: Context, origFailure: Result): string {
   const failure = cloneDeep(origFailure);
 
-  let msg: string = '';
+  let msg = '';
 
   if ('returnedPromiseRejection' === failure?.diag?.tapCaught) {
     msg += renderException(context, failure as Result<ExceptionDiag>);
@@ -109,7 +109,7 @@ function fallback(failure: Partial<Result>): string {
   return indent(msg);
 }
 
-function repairStackTrace(context: Context, stack: string) {
+function repairStackTrace(context: Context, stack: string): string {
   const ruined = stack
     .trimRight()
     .replace(/\((?!\/)/g, `(${context.globalConfig.rootDir}/`)
@@ -133,7 +133,7 @@ function renderAtWithoutStack(context: Context, diag: any): string {
   return msg;
 }
 
-function maybeDeleteStackInfo(rendered: string, diag: any) {
+function maybeDeleteStackInfo(rendered: string, diag: any): void {
   delete diag.stack;
   // guessing if it has line-numbered sections; terrible
   if (-1 !== rendered.indexOf(' | ')) {
@@ -160,11 +160,14 @@ function diffColour(char: string): (value: string) => string {
     case '@':
       return chalk.yellow;
     default:
-      return (s: string) => s;
+      return (s: string): string => s;
   }
 }
 
-function renderException(context: Context, failure: Result<ExceptionDiag>) {
+function renderException(
+  context: Context,
+  failure: Result<ExceptionDiag>,
+): string {
   // undo tap's pretty formatting, and let jest have at it instead
   const stackAndMaybeCode = repairStackTrace(context, failure.diag.stack);
 
