@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`translation of terminations handles a test which timed out 1`] = `
-"
-
-<bold><red>  <bold>● </><bold>bravo (synthetic; test exploded) › bravo</></>
+"<bold><red>  <bold>● </><bold>bravo (synthetic; test exploded) › bravo</></>
 
     Additionally, <gray>tap</> said:
 

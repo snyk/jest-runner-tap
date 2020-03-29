@@ -42,7 +42,9 @@ export function pushTestResults(
     msg += '\n';
     failureMessages.push(msg);
   }
-  result.failureMessage += failureMessages.join('\n').trimRight() + '\n\n';
+  if (failureMessages.length) {
+    result.failureMessage += failureMessages.join('\n').trimRight() + '\n\n';
+  }
   const root = 0 === path.length;
   result.testResults.push({
     title: root ? '⊥' : path[path.length - 1],
