@@ -1,0 +1,16 @@
+TAP version 13
+ok 1 - empty-describe.test.js # time=9.01ms {
+    # Subtest: alpha
+        1..0
+    ok 1 - alpha # time=3.083ms
+    
+    # Subtest: bravo
+        1..0
+    ok 2 - bravo # time=0.418ms
+    
+    1..2
+    # time=9.01ms
+}
+
+1..1
+# time=189.09ms

@@ -51,6 +51,24 @@ globals: {
 }        
 ```
 
+
+#### Risk?
+
+We could miss failing tests. If you trust `tap`'s exit code, this is
+pretty low risk. The exit code is added as a failure after the regular
+processing.
+
+We could confuse diagnosis of a failure, by misrepresenting the error,
+or by crashing while parsing an error message. 
+
+We could "lie" to `jest`, for example, we allow tests with no assertions,
+which `jest` might (correcly?) reject as "empty describe block", see
+[empty-describe.test.js](test/fixtures/empty-describe.test.js), which we
+consider valid. This is necessary because many(tm) tests only check for
+throwing, and the convention in `tap` is to not catch these; and just let
+them escape. c.f. [supertest](https://github.com/visionmedia/supertest#example)
+
+
 #### License, contributing?
 
 MIT, Apache2, or ask! Yes please, github.

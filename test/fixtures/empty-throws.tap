@@ -1,0 +1,54 @@
+TAP version 13
+not ok 1 - empty-throws.test.js # time=18.34ms
+  ---
+  env: {}
+  file: empty-throws.test.js
+  timeout: 1000
+  command: /usr/bin/node
+  args:
+    - -r
+    - /home/faux/code/jest-runner-tap/node_modules/esm/esm.js
+    - empty-throws.test.js
+  stdio:
+    - 0
+    - pipe
+    - 2
+  cwd: /home/faux/code/jest-runner-tap/test/fixtures
+  exitCode: 1
+  ...
+{
+    # Subtest: alpha
+        1..0
+    ok 1 - alpha # time=3.215ms
+    
+    # Subtest: bravo
+        not ok 1 - oh no
+          ---
+          stack: |
+            Test.<anonymous> (empty-throws.test.js:7:9)
+          at:
+            line: 7
+            column: 9
+            file: empty-throws.test.js
+            function: Test.<anonymous>
+          tapCaught: returnedPromiseRejection
+          test: bravo
+          source: |
+            test('bravo', async () => {
+              throw new Error('oh no');
+            --------^
+            });
+          ...
+        
+        1..1
+        # failed 1 test
+    not ok 2 - bravo # time=9.655ms
+    
+    1..2
+    # failed 1 of 2 tests
+    # time=18.34ms
+}
+
+1..1
+# failed 1 test
+# time=202.681ms
