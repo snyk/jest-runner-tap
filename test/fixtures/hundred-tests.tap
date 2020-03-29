@@ -1,0 +1,567 @@
+TAP version 13
+not ok 1 - hundred-tests.test.js # time=272.322ms
+  ---
+  env: {}
+  file: hundred-tests.test.js
+  timeout: 1000
+  command: /usr/bin/node
+  args:
+    - -r
+    - /home/faux/code/jest-runner-tap/node_modules/esm/esm.js
+    - hundred-tests.test.js
+  stdio:
+    - 0
+    - pipe
+    - 2
+  cwd: /home/faux/code/jest-runner-tap/test/fixtures
+  exitCode: 1
+  ...
+{
+    # Subtest: outer
+        not ok 1 - before
+          ---
+          at:
+            line: 4
+            column: 5
+            file: hundred-tests.test.js
+            type: Test
+          stack: |
+            Test.<anonymous> (hundred-tests.test.js:4:5)
+            Object.<anonymous> (hundred-tests.test.js:3:1)
+          source: |
+            test('outer', async (t) => {
+              t.ok(false, 'before');
+            ----^
+              for (let i = 0; i < 100; ++i) {
+                t.test(`inner ${i}`, async (t) => {
+          ...
+        
+        # Subtest: inner 0
+            ok 1 - yup 0
+            1..1
+        ok 2 - inner 0 # time=195.102ms
+        
+        # Subtest: inner 1
+            ok 1 - yup 1
+            1..1
+        ok 3 - inner 1 # time=0.636ms
+        
+        # Subtest: inner 2
+            ok 1 - yup 2
+            1..1
+        ok 4 - inner 2 # time=0.488ms
+        
+        # Subtest: inner 3
+            ok 1 - yup 3
+            1..1
+        ok 5 - inner 3 # time=2.869ms
+        
+        # Subtest: inner 4
+            ok 1 - yup 4
+            1..1
+        ok 6 - inner 4 # time=0.441ms
+        
+        # Subtest: inner 5
+            ok 1 - yup 5
+            1..1
+        ok 7 - inner 5 # time=0.467ms
+        
+        # Subtest: inner 6
+            ok 1 - yup 6
+            1..1
+        ok 8 - inner 6 # time=0.417ms
+        
+        # Subtest: inner 7
+            ok 1 - yup 7
+            1..1
+        ok 9 - inner 7 # time=0.407ms
+        
+        # Subtest: inner 8
+            ok 1 - yup 8
+            1..1
+        ok 10 - inner 8 # time=0.463ms
+        
+        # Subtest: inner 9
+            ok 1 - yup 9
+            1..1
+        ok 11 - inner 9 # time=0.413ms
+        
+        # Subtest: inner 10
+            ok 1 - yup 10
+            1..1
+        ok 12 - inner 10 # time=0.408ms
+        
+        # Subtest: inner 11
+            ok 1 - yup 11
+            1..1
+        ok 13 - inner 11 # time=0.466ms
+        
+        # Subtest: inner 12
+            ok 1 - yup 12
+            1..1
+        ok 14 - inner 12 # time=0.413ms
+        
+        # Subtest: inner 13
+            ok 1 - yup 13
+            1..1
+        ok 15 - inner 13 # time=0.422ms
+        
+        # Subtest: inner 14
+            ok 1 - yup 14
+            1..1
+        ok 16 - inner 14 # time=0.407ms
+        
+        # Subtest: inner 15
+            ok 1 - yup 15
+            1..1
+        ok 17 - inner 15 # time=0.41ms
+        
+        # Subtest: inner 16
+            ok 1 - yup 16
+            1..1
+        ok 18 - inner 16 # time=0.408ms
+        
+        # Subtest: inner 17
+            ok 1 - yup 17
+            1..1
+        ok 19 - inner 17 # time=0.406ms
+        
+        # Subtest: inner 18
+            ok 1 - yup 18
+            1..1
+        ok 20 - inner 18 # time=0.448ms
+        
+        # Subtest: inner 19
+            ok 1 - yup 19
+            1..1
+        ok 21 - inner 19 # time=0.405ms
+        
+        # Subtest: inner 20
+            ok 1 - yup 20
+            1..1
+        ok 22 - inner 20 # time=0.442ms
+        
+        # Subtest: inner 21
+            ok 1 - yup 21
+            1..1
+        ok 23 - inner 21 # time=0.407ms
+        
+        # Subtest: inner 22
+            ok 1 - yup 22
+            1..1
+        ok 24 - inner 22 # time=0.403ms
+        
+        # Subtest: inner 23
+            ok 1 - yup 23
+            1..1
+        ok 25 - inner 23 # time=0.403ms
+        
+        # Subtest: inner 24
+            ok 1 - yup 24
+            1..1
+        ok 26 - inner 24 # time=0.402ms
+        
+        # Subtest: inner 25
+            ok 1 - yup 25
+            1..1
+        ok 27 - inner 25 # time=0.454ms
+        
+        # Subtest: inner 26
+            ok 1 - yup 26
+            1..1
+        ok 28 - inner 26 # time=0.399ms
+        
+        # Subtest: inner 27
+            ok 1 - yup 27
+            1..1
+        ok 29 - inner 27 # time=0.402ms
+        
+        # Subtest: inner 28
+            ok 1 - yup 28
+            1..1
+        ok 30 - inner 28 # time=0.404ms
+        
+        # Subtest: inner 29
+            ok 1 - yup 29
+            1..1
+        ok 31 - inner 29 # time=0.428ms
+        
+        # Subtest: inner 30
+            ok 1 - yup 30
+            1..1
+        ok 32 - inner 30 # time=0.448ms
+        
+        # Subtest: inner 31
+            ok 1 - yup 31
+            1..1
+        ok 33 - inner 31 # time=0.401ms
+        
+        # Subtest: inner 32
+            ok 1 - yup 32
+            1..1
+        ok 34 - inner 32 # time=0.401ms
+        
+        # Subtest: inner 33
+            ok 1 - yup 33
+            1..1
+        ok 35 - inner 33 # time=0.403ms
+        
+        # Subtest: inner 34
+            ok 1 - yup 34
+            1..1
+        ok 36 - inner 34 # time=0.402ms
+        
+        # Subtest: inner 35
+            ok 1 - yup 35
+            1..1
+        ok 37 - inner 35 # time=0.403ms
+        
+        # Subtest: inner 36
+            ok 1 - yup 36
+            1..1
+        ok 38 - inner 36 # time=0.401ms
+        
+        # Subtest: inner 37
+            ok 1 - yup 37
+            1..1
+        ok 39 - inner 37 # time=0.411ms
+        
+        # Subtest: inner 38
+            ok 1 - yup 38
+            1..1
+        ok 40 - inner 38 # time=0.407ms
+        
+        # Subtest: inner 39
+            ok 1 - yup 39
+            1..1
+        ok 41 - inner 39 # time=0.401ms
+        
+        # Subtest: inner 40
+            ok 1 - yup 40
+            1..1
+        ok 42 - inner 40 # time=0.403ms
+        
+        # Subtest: inner 41
+            ok 1 - yup 41
+            1..1
+        ok 43 - inner 41 # time=0.554ms
+        
+        # Subtest: inner 42
+            ok 1 - yup 42
+            1..1
+        ok 44 - inner 42 # time=0.366ms
+        
+        # Subtest: inner 43
+            ok 1 - yup 43
+            1..1
+        ok 45 - inner 43 # time=0.379ms
+        
+        # Subtest: inner 44
+            ok 1 - yup 44
+            1..1
+        ok 46 - inner 44 # time=0.362ms
+        
+        # Subtest: inner 45
+            ok 1 - yup 45
+            1..1
+        ok 47 - inner 45 # time=0.362ms
+        
+        # Subtest: inner 46
+            ok 1 - yup 46
+            1..1
+        ok 48 - inner 46 # time=0.363ms
+        
+        # Subtest: inner 47
+            ok 1 - yup 47
+            1..1
+        ok 49 - inner 47 # time=0.361ms
+        
+        # Subtest: inner 48
+            ok 1 - yup 48
+            1..1
+        ok 50 - inner 48 # time=0.361ms
+        
+        # Subtest: inner 49
+            ok 1 - yup 49
+            1..1
+        ok 51 - inner 49 # time=0.362ms
+        
+        # Subtest: inner 50
+            ok 1 - yup 50
+            1..1
+        ok 52 - inner 50 # time=0.365ms
+        
+        # Subtest: inner 51
+            ok 1 - yup 51
+            1..1
+        ok 53 - inner 51 # time=0.389ms
+        
+        # Subtest: inner 52
+            ok 1 - yup 52
+            1..1
+        ok 54 - inner 52 # time=0.359ms
+        
+        # Subtest: inner 53
+            ok 1 - yup 53
+            1..1
+        ok 55 - inner 53 # time=0.399ms
+        
+        # Subtest: inner 54
+            ok 1 - yup 54
+            1..1
+        ok 56 - inner 54 # time=0.373ms
+        
+        # Subtest: inner 55
+            ok 1 - yup 55
+            1..1
+        ok 57 - inner 55 # time=0.361ms
+        
+        # Subtest: inner 56
+            ok 1 - yup 56
+            1..1
+        ok 58 - inner 56 # time=0.356ms
+        
+        # Subtest: inner 57
+            ok 1 - yup 57
+            1..1
+        ok 59 - inner 57 # time=0.361ms
+        
+        # Subtest: inner 58
+            ok 1 - yup 58
+            1..1
+        ok 60 - inner 58 # time=0.427ms
+        
+        # Subtest: inner 59
+            ok 1 - yup 59
+            1..1
+        ok 61 - inner 59 # time=0.362ms
+        
+        # Subtest: inner 60
+            ok 1 - yup 60
+            1..1
+        ok 62 - inner 60 # time=0.357ms
+        
+        # Subtest: inner 61
+            ok 1 - yup 61
+            1..1
+        ok 63 - inner 61 # time=0.357ms
+        
+        # Subtest: inner 62
+            ok 1 - yup 62
+            1..1
+        ok 64 - inner 62 # time=0.429ms
+        
+        # Subtest: inner 63
+            ok 1 - yup 63
+            1..1
+        ok 65 - inner 63 # time=0.367ms
+        
+        # Subtest: inner 64
+            ok 1 - yup 64
+            1..1
+        ok 66 - inner 64 # time=0.359ms
+        
+        # Subtest: inner 65
+            ok 1 - yup 65
+            1..1
+        ok 67 - inner 65 # time=0.357ms
+        
+        # Subtest: inner 66
+            ok 1 - yup 66
+            1..1
+        ok 68 - inner 66 # time=0.393ms
+        
+        # Subtest: inner 67
+            ok 1 - yup 67
+            1..1
+        ok 69 - inner 67 # time=0.358ms
+        
+        # Subtest: inner 68
+            ok 1 - yup 68
+            1..1
+        ok 70 - inner 68 # time=0.359ms
+        
+        # Subtest: inner 69
+            ok 1 - yup 69
+            1..1
+        ok 71 - inner 69 # time=0.389ms
+        
+        # Subtest: inner 70
+            ok 1 - yup 70
+            1..1
+        ok 72 - inner 70 # time=0.36ms
+        
+        # Subtest: inner 71
+            ok 1 - yup 71
+            1..1
+        ok 73 - inner 71 # time=0.362ms
+        
+        # Subtest: inner 72
+            ok 1 - yup 72
+            1..1
+        ok 74 - inner 72 # time=0.36ms
+        
+        # Subtest: inner 73
+            ok 1 - yup 73
+            1..1
+        ok 75 - inner 73 # time=0.394ms
+        
+        # Subtest: inner 74
+            ok 1 - yup 74
+            1..1
+        ok 76 - inner 74 # time=0.393ms
+        
+        # Subtest: inner 75
+            ok 1 - yup 75
+            1..1
+        ok 77 - inner 75 # time=0.357ms
+        
+        # Subtest: inner 76
+            ok 1 - yup 76
+            1..1
+        ok 78 - inner 76 # time=0.363ms
+        
+        # Subtest: inner 77
+            ok 1 - yup 77
+            1..1
+        ok 79 - inner 77 # time=0.641ms
+        
+        # Subtest: inner 78
+            ok 1 - yup 78
+            1..1
+        ok 80 - inner 78 # time=0.368ms
+        
+        # Subtest: inner 79
+            ok 1 - yup 79
+            1..1
+        ok 81 - inner 79 # time=0.381ms
+        
+        # Subtest: inner 80
+            ok 1 - yup 80
+            1..1
+        ok 82 - inner 80 # time=0.348ms
+        
+        # Subtest: inner 81
+            ok 1 - yup 81
+            1..1
+        ok 83 - inner 81 # time=0.347ms
+        
+        # Subtest: inner 82
+            ok 1 - yup 82
+            1..1
+        ok 84 - inner 82 # time=0.349ms
+        
+        # Subtest: inner 83
+            ok 1 - yup 83
+            1..1
+        ok 85 - inner 83 # time=0.356ms
+        
+        # Subtest: inner 84
+            ok 1 - yup 84
+            1..1
+        ok 86 - inner 84 # time=0.37ms
+        
+        # Subtest: inner 85
+            ok 1 - yup 85
+            1..1
+        ok 87 - inner 85 # time=0.383ms
+        
+        # Subtest: inner 86
+            ok 1 - yup 86
+            1..1
+        ok 88 - inner 86 # time=0.343ms
+        
+        # Subtest: inner 87
+            ok 1 - yup 87
+            1..1
+        ok 89 - inner 87 # time=0.416ms
+        
+        # Subtest: inner 88
+            ok 1 - yup 88
+            1..1
+        ok 90 - inner 88 # time=0.36ms
+        
+        # Subtest: inner 89
+            ok 1 - yup 89
+            1..1
+        ok 91 - inner 89 # time=0.355ms
+        
+        # Subtest: inner 90
+            ok 1 - yup 90
+            1..1
+        ok 92 - inner 90 # time=0.359ms
+        
+        # Subtest: inner 91
+            ok 1 - yup 91
+            1..1
+        ok 93 - inner 91 # time=0.357ms
+        
+        # Subtest: inner 92
+            ok 1 - yup 92
+            1..1
+        ok 94 - inner 92 # time=0.361ms
+        
+        # Subtest: inner 93
+            ok 1 - yup 93
+            1..1
+        ok 95 - inner 93 # time=0.356ms
+        
+        # Subtest: inner 94
+            ok 1 - yup 94
+            1..1
+        ok 96 - inner 94 # time=0.387ms
+        
+        # Subtest: inner 95
+            ok 1 - yup 95
+            1..1
+        ok 97 - inner 95 # time=0.412ms
+        
+        # Subtest: inner 96
+            ok 1 - yup 96
+            1..1
+        ok 98 - inner 96 # time=0.36ms
+        
+        # Subtest: inner 97
+            ok 1 - yup 97
+            1..1
+        ok 99 - inner 97 # time=0.365ms
+        
+        # Subtest: inner 98
+            ok 1 - yup 98
+            1..1
+        ok 100 - inner 98 # time=0.351ms
+        
+        # Subtest: inner 99
+            ok 1 - yup 99
+            1..1
+        ok 101 - inner 99 # time=0.354ms
+        
+        not ok 102 - after
+          ---
+          at:
+            line: 10
+            column: 5
+            file: hundred-tests.test.js
+            type: Test
+          stack: |
+            Test.<anonymous> (hundred-tests.test.js:10:5)
+            Object.<anonymous> (hundred-tests.test.js:3:1)
+          source: |2
+              }
+              t.ok(false, 'after');
+            ----^
+            });
+          ...
+        
+        1..102
+        # failed 2 of 102 tests
+    not ok 1 - outer # time=269.92ms
+    
+    1..1
+    # failed 1 test
+    # time=272.322ms
+}
+
+1..1
+# failed 1 test
+# time=472.377ms

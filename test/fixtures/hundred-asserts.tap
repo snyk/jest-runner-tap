@@ -1,0 +1,167 @@
+TAP version 13
+not ok 1 - hundred-asserts.test.js # time=29.319ms
+  ---
+  env: {}
+  file: hundred-asserts.test.js
+  timeout: 1000
+  command: /usr/bin/node
+  args:
+    - -r
+    - /home/faux/code/jest-runner-tap/node_modules/esm/esm.js
+    - hundred-asserts.test.js
+  stdio:
+    - 0
+    - pipe
+    - 2
+  cwd: /home/faux/code/jest-runner-tap/test/fixtures
+  exitCode: 1
+  ...
+{
+    # Subtest: outer
+        not ok 1 - before
+          ---
+          at:
+            line: 4
+            column: 5
+            file: hundred-asserts.test.js
+            type: Test
+          stack: |
+            Test.<anonymous> (hundred-asserts.test.js:4:5)
+            Object.<anonymous> (hundred-asserts.test.js:3:1)
+          source: |
+            test('outer', async (t) => {
+              t.ok(false, 'before');
+            ----^
+              for (let i = 0; i < 100; ++i) {
+                t.ok(true, `yup ${i}`);
+          ...
+        
+        ok 2 - yup 0
+        ok 3 - yup 1
+        ok 4 - yup 2
+        ok 5 - yup 3
+        ok 6 - yup 4
+        ok 7 - yup 5
+        ok 8 - yup 6
+        ok 9 - yup 7
+        ok 10 - yup 8
+        ok 11 - yup 9
+        ok 12 - yup 10
+        ok 13 - yup 11
+        ok 14 - yup 12
+        ok 15 - yup 13
+        ok 16 - yup 14
+        ok 17 - yup 15
+        ok 18 - yup 16
+        ok 19 - yup 17
+        ok 20 - yup 18
+        ok 21 - yup 19
+        ok 22 - yup 20
+        ok 23 - yup 21
+        ok 24 - yup 22
+        ok 25 - yup 23
+        ok 26 - yup 24
+        ok 27 - yup 25
+        ok 28 - yup 26
+        ok 29 - yup 27
+        ok 30 - yup 28
+        ok 31 - yup 29
+        ok 32 - yup 30
+        ok 33 - yup 31
+        ok 34 - yup 32
+        ok 35 - yup 33
+        ok 36 - yup 34
+        ok 37 - yup 35
+        ok 38 - yup 36
+        ok 39 - yup 37
+        ok 40 - yup 38
+        ok 41 - yup 39
+        ok 42 - yup 40
+        ok 43 - yup 41
+        ok 44 - yup 42
+        ok 45 - yup 43
+        ok 46 - yup 44
+        ok 47 - yup 45
+        ok 48 - yup 46
+        ok 49 - yup 47
+        ok 50 - yup 48
+        ok 51 - yup 49
+        ok 52 - yup 50
+        ok 53 - yup 51
+        ok 54 - yup 52
+        ok 55 - yup 53
+        ok 56 - yup 54
+        ok 57 - yup 55
+        ok 58 - yup 56
+        ok 59 - yup 57
+        ok 60 - yup 58
+        ok 61 - yup 59
+        ok 62 - yup 60
+        ok 63 - yup 61
+        ok 64 - yup 62
+        ok 65 - yup 63
+        ok 66 - yup 64
+        ok 67 - yup 65
+        ok 68 - yup 66
+        ok 69 - yup 67
+        ok 70 - yup 68
+        ok 71 - yup 69
+        ok 72 - yup 70
+        ok 73 - yup 71
+        ok 74 - yup 72
+        ok 75 - yup 73
+        ok 76 - yup 74
+        ok 77 - yup 75
+        ok 78 - yup 76
+        ok 79 - yup 77
+        ok 80 - yup 78
+        ok 81 - yup 79
+        ok 82 - yup 80
+        ok 83 - yup 81
+        ok 84 - yup 82
+        ok 85 - yup 83
+        ok 86 - yup 84
+        ok 87 - yup 85
+        ok 88 - yup 86
+        ok 89 - yup 87
+        ok 90 - yup 88
+        ok 91 - yup 89
+        ok 92 - yup 90
+        ok 93 - yup 91
+        ok 94 - yup 92
+        ok 95 - yup 93
+        ok 96 - yup 94
+        ok 97 - yup 95
+        ok 98 - yup 96
+        ok 99 - yup 97
+        ok 100 - yup 98
+        ok 101 - yup 99
+        not ok 102 - after
+          ---
+          at:
+            line: 8
+            column: 5
+            file: hundred-asserts.test.js
+            type: Test
+          stack: |
+            Test.<anonymous> (hundred-asserts.test.js:8:5)
+            Object.<anonymous> (hundred-asserts.test.js:3:1)
+          source: |2
+              }
+              t.ok(false, 'after');
+            ----^
+            });
+          ...
+        
+        1..102
+        # failed 2 of 102 tests
+    not ok 1 - outer # time=23.919ms
+    
+    1..1
+    # failed 1 test
+    # time=29.319ms
+}
+
+1..1
+# failed 1 test
+# time=215.942ms

@@ -1,0 +1,291 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderer has reasonably consistent whitespace output handles many asserts in one test 1`] = `
+"<bold><red>  <bold>● </><bold>outer › before</></>
+
+    The failure occurred here:
+
+    </> <gray> 2 | </></>
+    </> <gray> 3 | </>test(<green>'outer'</><yellow>,</> async (t) <yellow>=></> {</>
+    </><red><bold>></></><gray> 4 | </>  t<yellow>.</>ok(<cyan>false</><yellow>,</> <green>'before'</>)<yellow>;</></>
+    </> <gray>   | </>    <red><bold>^</></></>
+    </> <gray> 5 | </>  <cyan>for</> (let i <yellow>=</> 0</><yellow>;</> i <yellow><</> 100</><yellow>;</> <yellow>++</>i) {</>
+    </> <gray> 6 | </>    t<yellow>.</>ok(<cyan>true</><yellow>,</> <green>\`yup \${i}\`</>)<yellow>;</></>
+    </> <gray> 7 | </>  }</>
+
+      <dim>at Test.<anonymous> (</>hundred-asserts.test.js<dim>:4:5)</>
+      <dim>at Object.<anonymous> (</>hundred-asserts.test.js<dim>:3:1)</>
+
+
+    Additionally, <gray>tap</> said:
+
+    name: before
+    fullname: hundred-asserts.test.js outer
+
+<bold><red>  <bold>● </><bold>outer › after</></>
+
+    The failure occurred here:
+
+    </> <gray>  6 | </>    t<yellow>.</>ok(<cyan>true</><yellow>,</> <green>\`yup \${i}\`</>)<yellow>;</></>
+    </> <gray>  7 | </>  }</>
+    </><red><bold>></></><gray>  8 | </>  t<yellow>.</>ok(<cyan>false</><yellow>,</> <green>'after'</>)<yellow>;</></>
+    </> <gray>    | </>    <red><bold>^</></></>
+    </> <gray>  9 | </>})<yellow>;</></>
+    </> <gray> 10 | </></>
+
+      <dim>at Test.<anonymous> (</>hundred-asserts.test.js<dim>:8:5)</>
+      <dim>at Object.<anonymous> (</>hundred-asserts.test.js<dim>:3:1)</>
+
+
+    Additionally, <gray>tap</> said:
+
+    name: after
+    fullname: hundred-asserts.test.js outer
+
+"
+`;
+
+exports[`renderer has reasonably consistent whitespace output handles many tests in one describe 1`] = `
+"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<bold><red>  <bold>● </><bold>outer › before</></>
+
+    The failure occurred here:
+
+    </> <gray> 2 | </></>
+    </> <gray> 3 | </>test(<green>'outer'</><yellow>,</> async (t) <yellow>=></> {</>
+    </><red><bold>></></><gray> 4 | </>  t<yellow>.</>ok(<cyan>false</><yellow>,</> <green>'before'</>)<yellow>;</></>
+    </> <gray>   | </>    <red><bold>^</></></>
+    </> <gray> 5 | </>  <cyan>for</> (let i <yellow>=</> 0</><yellow>;</> i <yellow><</> 100</><yellow>;</> <yellow>++</>i) {</>
+    </> <gray> 6 | </>    t<yellow>.</>test(<green>\`inner \${i}\`</><yellow>,</> async (t) <yellow>=></> {</>
+    </> <gray> 7 | </>      t<yellow>.</>ok(<cyan>true</><yellow>,</> <green>\`yup \${i}\`</>)<yellow>;</></>
+
+      <dim>at Test.<anonymous> (</>hundred-tests.test.js<dim>:4:5)</>
+      <dim>at Object.<anonymous> (</>hundred-tests.test.js<dim>:3:1)</>
+
+
+    Additionally, <gray>tap</> said:
+
+    name: before
+    fullname: hundred-tests.test.js outer
+
+<bold><red>  <bold>● </><bold>outer › after</></>
+
+    The failure occurred here:
+
+    </> <gray>  8 | </>    })<yellow>;</></>
+    </> <gray>  9 | </>  }</>
+    </><red><bold>></></><gray> 10 | </>  t<yellow>.</>ok(<cyan>false</><yellow>,</> <green>'after'</>)<yellow>;</></>
+    </> <gray>    | </>    <red><bold>^</></></>
+    </> <gray> 11 | </>})<yellow>;</></>
+    </> <gray> 12 | </></>
+
+      <dim>at Test.<anonymous> (</>hundred-tests.test.js<dim>:10:5)</>
+      <dim>at Object.<anonymous> (</>hundred-tests.test.js<dim>:3:1)</>
+
+
+    Additionally, <gray>tap</> said:
+
+    name: after
+    fullname: hundred-tests.test.js outer
+
+"
+`;
