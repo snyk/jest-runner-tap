@@ -1,6 +1,6 @@
 {
   "name": "jest-runner-tap",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Jest runner which executes tap, and parses the result",
   "main": "dist/index.js",
   "repository": "https://github.com/FauxFaux/jest-runner-tap",
@@ -51,6 +51,11 @@
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
   },
+  "files": [
+    "lib/",
+    "dist/",
+    "README.md"
+  ],
   "engines": {
     "node": ">=10"
   }
