@@ -100,4 +100,4 @@ them escape. c.f. [supertest](https://github.com/visionmedia/supertest#example)
 
 #### License, contributing?
 
-MIT, Apache2, or ask! Yes please, github.
+Apache2. Yes please, github.
