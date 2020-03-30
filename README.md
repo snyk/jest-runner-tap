@@ -64,8 +64,10 @@ globals: {
     so asserts belong to tests, and child tests belong to parent tests.
 
  * [`translateResult`](lib/tree/index.ts) visits every item in the tree, and
-    builds the result, e.g. by `pushTestResult` (which `render*`s parts), and
-    `pushProcessFailure` if the whole process fails.
+    builds the result, e.g. by `pushTestResult` and `pushProcessFailure`.
+
+ * [`pushTestResult`](lib/render/index.ts) generates a `jest` test result from a
+    tap result, including `renderDiag`s, which are tap's failure explanation.
 
  * [`renderDiag`](lib/render/diag.ts) tries to prettify the tap output by calling
     `jest` helper functions, and falls back to just showing the `tap` output if it
