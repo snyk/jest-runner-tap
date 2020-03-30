@@ -52,6 +52,33 @@ globals: {
 ```
 
 
+#### How does it work?
+
+ * [`lib/index`](lib/index.ts) exposes a function which matches `jest`'s `runner`
+    interface. This function is `bySpawn`.
+
+ * [`bySpawn`](lib/by-spawn.ts) parses config, then executes `tap`, sends the
+    output to `BuildTree`, and then `translateResult`s.
+
+ * [`BuildTree`](lib/tree/builder.ts) builds an in-memory tree of `tap` tests,
+    so asserts belong to tests, and child tests belong to parent tests.
+
+ * [`translateResult`](lib/tree/index.ts) visits every item in the tree, and
+    builds the result, e.g. by `pushTestResult` (which `render*`s parts), and
+    `pushProcessFailure` if the whole process fails.
+
+ * [`renderDiag`](lib/render/diag.ts) tries to prettify the tap output by calling
+    `jest` helper functions, and falls back to just showing the `tap` output if it
+    didn't do a good job.
+
+
+If a test is missing, it's possible `BuildTree` is discarding it (thinking it's a
+`describe` block?), or the tap stream has totally failed to parse (we use `tap-parser`).
+
+If the diagnosis is ugly or confusing, it's probably worth adding a special case to
+`renderDiag` to just not try and guess in that case. Or a better renderer!
+
+
 #### Risk?
 
 We could miss failing tests. If you trust `tap`'s exit code, this is
