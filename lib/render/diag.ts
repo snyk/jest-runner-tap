@@ -24,8 +24,8 @@ export function renderDiag(context: Context, origFailure: Result): string {
       const diff = printDiffOrStringify(
         diag.wanted,
         diag.found,
-        '  found',
         ' wanted',
+        '  found',
         true,
       );
       msg += indent(`${diff}\ncompare: ${diag.compare}\n\n`);

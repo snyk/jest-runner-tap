@@ -3,8 +3,8 @@
 exports[`assert rendering handles equal 1`] = `
 "<bold><red>  <bold>● </><bold>assertions › equality › is equal</></>
 
-      found: <green>true</>
-     wanted: <red>false</>
+     wanted: <green>true</>
+      found: <red>false</>
     compare: ===
 
     The failure occurred here:
