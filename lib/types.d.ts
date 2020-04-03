@@ -8,6 +8,7 @@ declare module 'tap-parser' {
     on(event: 'assert', handler: (result: Result) => void): this;
     on(event: 'child', handler: (child: TapParser) => void): this;
     on(event: 'comment', handler: (comment: string) => void): this;
+    on(event: 'extra', handler: (line: string) => void): this;
     on(event: 'line', handler: (line: string) => void): this;
   }
 

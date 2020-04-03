@@ -1,0 +1,15 @@
+TAP version 13
+ok 1 - stdout.test.js # time=7.556ms {
+    # Subtest: hello
+        ok 1 - before
+    hello there
+        ok 2 - after
+        1..2
+    ok 1 - hello # time=2.745ms
+    
+    1..1
+    # time=7.556ms
+}
+
+1..1
+# time=250.235ms

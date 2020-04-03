@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maintenance of stdout handles a simple console.log 1`] = `
+Array [
+  Object {
+    "message": "hello there",
+    "origin": "tap",
+    "type": "log",
+  },
+]
+`;
