@@ -22,7 +22,11 @@ export class BuildTree {
   private readonly guessedName?: string;
   private nextSubTestName?: string;
 
-  constructor(parser: TapParser, guessedName?: string) {
+  constructor(
+    parser: TapParser,
+    extraSink: (text: string) => void,
+    guessedName?: string,
+  ) {
     this.guessedName = guessedName;
 
     parser.on('line', (line) => {
@@ -40,7 +44,7 @@ export class BuildTree {
           `new child while we still had events: ${inspect(this.ours)}`,
         );
       }
-      this.currentChild = new BuildTree(child, this.nextSubTestName);
+      this.currentChild = new BuildTree(child, extraSink, this.nextSubTestName);
     });
 
     parser.on('assert', (result) => {
@@ -58,6 +62,10 @@ export class BuildTree {
         });
       }
     });
+
+    parser.on('extra', (text) =>
+      extraSink(text.replace(/^ {4}/, '').replace(/\n$/, '')),
+    );
   }
 
   finished(): TreeNode[] {

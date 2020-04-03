@@ -2,10 +2,6 @@
 
 exports[`maintenance of stdout handles a simple console.log 1`] = `
 Array [
-  Object {
-    "message": "hello there",
-    "origin": "tap",
-    "type": "log",
-  },
+  "hello there",
 ]
 `;

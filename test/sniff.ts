@@ -3,8 +3,11 @@ import * as path from 'path';
 import type { TestResult } from '@jest/test-result';
 import { makeParser, translateResult } from '../lib/tree';
 
-export async function testTranslation(tapFile: string): Promise<TestResult> {
-  const [parser, output] = makeParser();
+export async function testTranslation(
+  tapFile: string,
+  extraSink = (text: string) => console.log('extra', text),
+): Promise<TestResult> {
+  const [parser, output] = makeParser(extraSink);
   await new Promise((resolve, reject) => {
     const fullPath = require.resolve(tapFile);
     const stream = fs.createReadStream(fullPath);

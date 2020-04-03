@@ -6,10 +6,12 @@ import { BuildTree } from './builder';
 import { Context } from '../context';
 
 // it is up to the caller to make sure the returned array is only read after the parser is complete
-export function makeParser(): [TapParser, BuildTree] {
+export function makeParser(
+  extraSink: (text: string) => void,
+): [TapParser, BuildTree] {
   const parser = new TapParser();
 
-  const output = new BuildTree(parser);
+  const output = new BuildTree(parser, extraSink);
 
   return [parser, output];
 }

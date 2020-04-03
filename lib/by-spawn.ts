@@ -22,7 +22,9 @@ export async function bySpawn(
     maskErrors: true,
   };
 
-  const [parser, output] = makeParser();
+  const [parser, output] = makeParser((text) =>
+    environment.global.console.log(text),
+  );
 
   const processResult = await runTapOn(parser, config.tapCommand, testPath);
 
