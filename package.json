@@ -7,11 +7,12 @@
   "license": "Apache-2.0",
   "scripts": {
     "format": "prettier --write '{lib,test}/**/*.ts'",
-    "prepare": "npm run build",
+    "prepare": "npm run snyk-protect && npm run build",
     "depcheck": "depcheck",
     "test": "jest",
     "lint": "eslint 'lib/**/*.ts'",
-    "build": "tsc"
+    "build": "tsc",
+    "snyk-protect": "snyk protect"
   },
   "author": "Chris West (Faux) <solo-npm@goeswhere.com>",
   "dependencies": {
@@ -24,7 +25,8 @@
     "lodash.clonedeep": "^4.5.0",
     "tap-parser": "^10.0.1",
     "tslib": "^1.11.1",
-    "yaml": "^1.8.3"
+    "yaml": "^1.8.3",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@jest/environment": "^25.1.0",
@@ -58,5 +60,6 @@
   ],
   "engines": {
     "node": ">=10"
-  }
+  },
+  "snyk": true
 }
