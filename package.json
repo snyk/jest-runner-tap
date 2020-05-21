@@ -1,6 +1,6 @@
 {
   "name": "jest-runner-tap",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Jest runner which executes tap, and parses the result",
   "main": "dist/index.js",
   "repository": "https://github.com/snyk/jest-runner-tap",
