@@ -48,7 +48,6 @@ export function translateResult(
 function defaultTestResult(testPath: string): TestResult {
   const result = createEmptyTestResult();
   result.failureMessage = '';
-  result.displayName = testPath;
   result.testFilePath = testPath;
   return result;
 }
