@@ -8,6 +8,7 @@ import { codeFrameColumns } from '@babel/code-frame';
 import chalk = require('chalk');
 import { Context } from '../context';
 import * as yaml from 'yaml';
+import { inspect } from 'util';
 
 export function renderDiag(context: Context, origFailure: Result): string {
   const failure = cloneDeep(origFailure);
@@ -105,7 +106,16 @@ function fallback(failure: Partial<Result>): string {
     return '';
   }
   let msg = `Additionally, ${chalk.grey('tap')} said:\n\n`;
-  msg += yaml.stringify(failure);
+  try {
+    msg += yaml.stringify(failure);
+  } catch (err) {
+    msg += inspect(failure, {
+      depth: 4,
+      colors: true,
+    });
+
+    msg += "\n...which isn't valid yaml: " + err;
+  }
   return indent(msg);
 }
 
