@@ -187,6 +187,6 @@ function indent(val: string, by = '    '): string {
   return val.replace(/^(?!\s*$)/gm, by);
 }
 
-function isEmpty(val: object | undefined): val is {} {
+function isEmpty(val: any): val is undefined {
   return !val || 0 === Object.keys(val).length;
 }
