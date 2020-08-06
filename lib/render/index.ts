@@ -88,12 +88,15 @@ export function pushProcessFailure(
   sig: string | null,
 ): void {
   result.testResults.push({
-    title: 'process success',
+    title: 'tap process finished successfully (safety check)',
     fullName: `${testPath} exited successfully`,
     duration: null,
     numPassingAsserts: 0,
     ancestorTitles: [testPath],
-    failureMessages: [`${code} - ${sig}`],
+    failureMessages: [
+      `exit code: ${code} (non-zero indicates that tap detected a problem)\n` +
+        `signal: ${sig} (non-null indicates the process was terminated externally, or timed out)`,
+    ],
     location: undefined,
     status: 'failed',
   });
